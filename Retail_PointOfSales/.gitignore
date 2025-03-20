@@ -1,3 +1,5 @@
 bin
 obj
-.idea
+../.idea
+../.vs
+../MaintainStudentScores.sln.DotSettings.user
