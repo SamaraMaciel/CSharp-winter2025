@@ -185,7 +185,7 @@
                 </Button>
 
                 <!-- End of Day Sales Button -->
-                <Button Width="110" Height="80" Margin="5" Grid.Row="7" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite">
+                <Button Width="110" Height="80" Margin="5" Grid.Row="7" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite" Click="EndofDayButton_Click">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
                         <Image Source="Images\endDay.png" Width="30" Height="30" Margin="5,10,5,5"/>

@@ -73,5 +73,15 @@ namespace Retail_PointOfSales
             // Show the OpeningFund window
             searchWindow.ShowDialog();
         }
+
+        //Trigger the EndofDay Window
+        private void EndofDayButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Create an instance of the EndofDay window
+            EndofDay EndofDayWindow = new EndofDay();
+
+            // Show the EndofDay window
+            EndofDayWindow.ShowDialog();
+        }
     }
 }
