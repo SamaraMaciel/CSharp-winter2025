@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Retail_PointOfSales"
         mc:Ignorable="d"
-        Title="Opening Fund" Height="450" Width="650" Background="SlateGray" Foreground="AntiqueWhite">
+        Title="Opening Fund" Height="500" Width="650" Background="SlateGray" Foreground="AntiqueWhite">
     <Grid Background="#FF161314">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -23,62 +23,62 @@
         <!-- Coins Section -->
         <StackPanel Grid.Row="1" Grid.Column="0" Margin="20">
             <TextBlock Text="Coins" FontWeight="Bold" Margin="0,0,0,10"/>
-            
+
             <!-- 5c -->
             <StackPanel Orientation="Horizontal">
-                <Image Source="Images\5C.png" Width="40" Height="40" Margin="5"/>
-                <TextBox x:Name="FiveCentsTextBox" Width="50" Margin="5"/>
+                <Image Width="40" Height="40" Margin="5" Source="/5C.png"/>
+                <TextBox x:Name="FiveCentsTextBox" Width="50" Margin="5" TextChanged="CalculateTotal"/>
             </StackPanel>
             <!-- 10c -->
             <StackPanel Orientation="Horizontal">
-                <Image Source="Images\10C.png" Width="40" Height="40" Margin="5"/>
-                <TextBox x:Name="TenCentsTextBox" Width="50" Margin="5"/>
+                <Image Source="/10C.png" Width="40" Height="40" Margin="5"/>
+                <TextBox x:Name="TenCentsTextBox" Width="50" Margin="5" TextChanged="CalculateTotal"/>
             </StackPanel>
             <!-- 25c -->
             <StackPanel Orientation="Horizontal">
-                <Image Source="Images\25C.png" Width="40" Height="40" Margin="5"/>
-                <TextBox x:Name="TwentyFiveCentsTextBox" Width="50" Margin="5"/>
+                <Image Source="/25C.png" Width="40" Height="40" Margin="5"/>
+                <TextBox x:Name="TwentyFiveCentsTextBox" Width="50" Margin="5" TextChanged="CalculateTotal"/>
             </StackPanel>
             <!-- $1 -->
             <StackPanel Orientation="Horizontal">
-                <Image Source="Images\$1.jpg" Width="40" Height="40" Margin="5"/>
-                <TextBox x:Name="OneDollarTextBox" Width="50" Margin="5"/>
+                <Image Source="/$1.jpg" Width="40" Height="40" Margin="5"/>
+                <TextBox x:Name="OneDollarTextBox" Width="50" Margin="5" TextChanged="CalculateTotal"/>
             </StackPanel>
             <!-- $2 -->
             <StackPanel Orientation="Horizontal">
-                <Image Source="Images\$2.png" Width="40" Height="40" Margin="5"/>
-                <TextBox x:Name="TwoDollarTextBox" Width="50" Margin="5"/>
+                <Image Source="/$2.png" Width="40" Height="40" Margin="5"/>
+                <TextBox x:Name="TwoDollarTextBox" Width="50" Margin="5" TextChanged="CalculateTotal"/>
             </StackPanel>
 
         </StackPanel>
 
         <!-- Notes Section -->
         <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
-            <TextBlock Text="Notes" FontWeight="Bold" Margin="0,10,0,10"/>
+            <TextBlock Text="Notes" FontWeight="Bold" Margin="0,10,0,10" />
             <!-- $5 -->
             <StackPanel Orientation="Horizontal">
-                <Image Source="Images\$5.jpg" Width="50" Height="25" Margin="5"/>
-                <TextBox Width="50" Margin="5"/>
+                <Image Source="/$5.jpg" Width="50" Height="25" Margin="5"/>
+                <TextBox Name="FiveDollarTextBox" Width="50" Margin="5" TextChanged="CalculateTotal"/>
             </StackPanel>
             <!-- $10 -->
             <StackPanel Orientation="Horizontal">
-                <Image Source="Images\$10.jpg" Width="50" Height="25" Margin="5"/>
-                <TextBox Width="50" Margin="5"/>
+                <Image Source="/$10.jpg" Width="50" Height="25" Margin="5"/>
+                <TextBox Name="TenDollarTextBox" Width="50" Margin="5" TextChanged="CalculateTotal"/>
             </StackPanel>
             <!-- $20 -->
             <StackPanel Orientation="Horizontal">
-                <Image Source="Images\$20.jpg" Width="50" Height="25" Margin="5"/>
-                <TextBox Width="50"  Margin="5"/>
+                <Image Source="/$20.jpg" Width="50" Height="25" Margin="5"/>
+                <TextBox Name="TwentyDollarTextBox" Width="50"  Margin="5" TextChanged="CalculateTotal"/>
             </StackPanel>
             <!-- $50 -->
             <StackPanel Orientation="Horizontal">
-                <Image Source="Images\$50.jpg" Width="50" Height="25" Margin="5"/>
-                <TextBox Width="50" Margin="5"/>
+                <Image Source="/$50.jpg" Width="50" Height="25" Margin="5"/>
+                <TextBox Name="FiftyDollarTextBox" Width="50" Margin="5" TextChanged="CalculateTotal"/>
             </StackPanel>
             <!-- $100 -->
             <StackPanel Orientation="Horizontal">
-                <Image Source="Images\$100.jpg" Width="50" Height="25" Margin="5"/>
-                <TextBox Width="50" Margin="5"/>
+                <Image Source="/$100.jpg" Width="50" Height="25" Margin="5"/>
+                <TextBox Name="HundredDollarTextBox" Width="50" Margin="5" TextChanged="CalculateTotal"/>
             </StackPanel>
         </StackPanel>
 
@@ -89,7 +89,7 @@
         </StackPanel>
         <!-- Buttons -->
         <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10">
-            <Button Content="ENTER" Width="100" Height="40" Margin="10" Background="Green" Foreground="White" Click="Button_Click"/>
+            <Button Content="SAVE" Width="100" Height="40" Margin="10" Background="Green" Foreground="White" Click="SaveButton_Click"/>
             <Button Content="CLOSE" Width="100" Margin="10" Background="Red" Foreground="White" Click="CloseButton_Click"/>
         </StackPanel>
     </Grid>
