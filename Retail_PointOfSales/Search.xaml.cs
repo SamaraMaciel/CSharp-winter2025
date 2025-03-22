@@ -19,9 +19,22 @@ namespace Retail_PointOfSales
     /// </summary>
     public partial class Search : Window
     {
+        ProductManager productManager = new ();
         public Search()
         {
             InitializeComponent();
+            LoadProducts();
+        }
+
+        private void LoadProducts()
+        {
+            List<Product> products = productManager.LoadAllProducts();
+            ProductListView.ItemsSource = products;
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

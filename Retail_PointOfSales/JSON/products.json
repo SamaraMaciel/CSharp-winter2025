@@ -1,0 +1,102 @@
+[
+  {
+    "productId": 1,
+    "productName": "Apple",
+    "productPrice": 0.99
+  },
+  {
+    "productId": 2,
+    "productName": "Banana",
+    "productPrice": 1.29
+  },
+  {
+    "productId": 3,
+    "productName": "Carrot",
+    "productPrice": 0.89
+  },
+  {
+    "productId": 4,
+    "productName": "Broccoli",
+    "productPrice": 1.99
+  },
+  {
+    "productId": 5,
+    "productName": "Chicken Breast",
+    "productPrice": 4.99
+  },
+  {
+    "productId": 6,
+    "productName": "Salmon Fillet",
+    "productPrice": 8.99
+  },
+  {
+    "productId": 7,
+    "productName": "Almonds",
+    "productPrice": 5.49
+  },
+  {
+    "productId": 8,
+    "productName": "Spinach",
+    "productPrice": 2.49
+  },
+  {
+    "productId": 9,
+    "productName": "Milk",
+    "productPrice": 1.69
+  },
+  {
+    "productId": 10,
+    "productName": "Cheese",
+    "productPrice": 3.49
+  },
+  {
+    "productId": 11,
+    "productName": "Orange Juice",
+    "productPrice": 3.99
+  },
+  {
+    "productId": 12,
+    "productName": "Bread",
+    "productPrice": 2.99
+  },
+  {
+    "productId": 13,
+    "productName": "Yogurt",
+    "productPrice": 1.89
+  },
+  {
+    "productId": 14,
+    "productName": "Eggs",
+    "productPrice": 2.99
+  },
+  {
+    "productId": 15,
+    "productName": "Frozen Pizza",
+    "productPrice": 6.49
+  },
+  {
+    "productId": 16,
+    "productName": "Ice Cream",
+    "productPrice": 4.29
+  },
+  {
+    "productId": 17,
+    "productName": "Tomato Sauce",
+    "productPrice": 1.49
+  },
+  {
+    "productId": 18,
+    "productName": "Cucumber",
+    "productPrice": 1.29
+  },
+  {
+    "productId": 19,
+    "productName": "Potato",
+    "productPrice": 0.79
+  },
+  {
+    "productId": 20,
+    "productName": "Garlic",
+    "productPrice": 0.99
+  }
+]
