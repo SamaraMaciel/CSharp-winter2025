@@ -5,6 +5,12 @@ namespace Retail_PointOfSales;
 public class ProductManager
 {
     private static readonly string path = Path.Combine(AppContext.BaseDirectory, @"..\..\..\JSON\products.json");
+    private List<Product> Products { get; set; }
+
+    public ProductManager()
+    {
+        LoadAllProducts();
+    }
     
     public List<Product> LoadAllProducts()
     {
@@ -12,7 +18,8 @@ public class ProductManager
         {
             using StreamReader sr = new StreamReader(path);
             string json = sr.ReadToEnd();
-            return  Newtonsoft.Json.JsonConvert.DeserializeObject<List<Product>>(json);
+            Products = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Product>>(json);
+            return Products;
         }
         
         return new List<Product>();
@@ -20,6 +27,9 @@ public class ProductManager
 
     public object Search(string searchText)
     {
-        throw new NotImplementedException();
+        var filteredProducts = Products
+            .Where(p => p.ProductName.ToLower().Contains(searchText.ToLower())).ToList();
+        return filteredProducts;
+        
     }
 }
