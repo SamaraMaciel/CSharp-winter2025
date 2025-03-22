@@ -21,7 +21,17 @@ namespace Retail_PointOfSales
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            // products
+            string searchText = SearchTextBox.Text.ToLower();
+            var result= productManager.Search(searchText);
+            if (result != null)
+            {
+                ProductListView.ItemsSource = result;
+            }
+            else
+            {
+                MessageBox.Show("Product not found. Please try again.", "Product not found.", 
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

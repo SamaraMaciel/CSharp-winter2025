@@ -25,11 +25,10 @@ public class ProductManager
         return new List<Product>();
     }
 
-    public object Search(string searchText)
+    public List<Product> Search(string searchText)
     {
         var filteredProducts = Products
             .Where(p => p.ProductName.ToLower().Contains(searchText.ToLower())).ToList();
-        return filteredProducts;
-        
+        return filteredProducts.Count == 0 ? null : filteredProducts;
     }
 }
