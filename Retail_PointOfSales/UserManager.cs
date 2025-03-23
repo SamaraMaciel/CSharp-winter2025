@@ -28,8 +28,8 @@ public class UserManager
         User user = Users.Find(u => u.UserName == username);
         
         // Check if a user was found and call the VerifyPassword to check if the password matches.
-        // Three arguments are being passed, 1st the typed password, 2nd the storedPassword, 3rd the stored salt.
-        if (user != null && VerifyPassword(password, user.Password, user.Salt))
+        // Three arguments are being passed, 1st the typed password, 2nd the storedPassword, 3rd the stored token.
+        if (user != null && VerifyPassword(password, user.Password, user.Token))
         {
             return user; // If it's ok, then return the user and login
         }
@@ -63,18 +63,18 @@ public class UserManager
     /// </summary>
     /// <param name="password">The password entered by the user.</param>
     /// <param name="storedPassword">The previously hashed password stored in the JSON file.</param>
-    /// <param name="storedSalt">The salt that was used when hashing the stored password.</param>
+    /// <param name="storedToken">The token that was used when hashing the stored password.</param>
     /// <returns>True if the password is correct; otherwise, false.</returns>
-    private static bool VerifyPassword(string password, string storedPassword, string storedSalt)
+    private static bool VerifyPassword(string password, string storedPassword, string storedToken)
     {
-        // Convert the stored base64-encoded salt back into a byte array
-        byte[] salt = Convert.FromBase64String(storedSalt);
+        // Convert the stored base64-encoded token back into a byte array
+        byte[] token = Convert.FromBase64String(storedToken);
 
-        // Create a PBKDF2 object with the user-provided password, the stored salt, 
+        // Create a PBKDF2 object with the user-provided password, the stored token, 
         // 100,000 iterations, and SHA256 as the hash algorithm.
-        using var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 100000, HashAlgorithmName.SHA256);
+        using var pbkdf2 = new Rfc2898DeriveBytes(password, token, 100000, HashAlgorithmName.SHA256);
 
-        // Generate a 32-byte hash from the provided password and stored salt
+        // Generate a 32-byte hash from the provided password and stored token
         byte[] hashBytes = pbkdf2.GetBytes(32);
 
         // Convert the computed hash into a base64 string and compare it with the stored hashed password
