@@ -31,7 +31,7 @@
         </StackPanel>
 
         <!-- Product List - Commenting this out. Will replace combo box -->
-        <ListView x:Name="ProductListView" Grid.Row="1" Grid.Column="0" Margin="10">
+        <ListView x:Name="ProductListView" Grid.Row="1" Grid.Column="0" Margin="10" SelectionChanged="ProductListView_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding ProductId}" Width="100"></GridViewColumn>
@@ -51,9 +51,9 @@
         <StackPanel Grid.Row="1" Grid.Column="1" Margin="10" Background="#FF1F1D1D" >
             <TextBlock Text="Product Details" FontSize="16" FontWeight="Bold" Foreground="AntiqueWhite" Margin="0,0,0,10" />
             <TextBlock Text="Name:" FontWeight="Bold" Foreground="AntiqueWhite" />
-            <TextBlock Text="{Binding SelectedProduct.Name}" Foreground="AntiqueWhite" />
+            <TextBlock Name="ProductName" Text="{Binding ProductName}" Foreground="AntiqueWhite"/>
             <TextBlock Text="Price:" FontWeight="Bold" Foreground="AntiqueWhite" />
-            <TextBlock Text="{Binding SelectedProduct.Price}" Foreground="AntiqueWhite" />
+            <TextBlock Name="ProductPrice" Text="{Binding ProductPrice, StringFormat=C}" Foreground="AntiqueWhite"/>
             
         </StackPanel>
 

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace Retail_PointOfSales
 {
@@ -31,6 +32,15 @@ namespace Retail_PointOfSales
             {
                 MessageBox.Show("Product not found. Please try again.", "Product not found.", 
                     MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ProductListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ProductListView.SelectedItem is Product selectedProduct)
+            {
+                ProductName.Text = selectedProduct.ProductName;
+                ProductPrice.Text = selectedProduct.ProductPrice.ToString("C");
             }
         }
     }
