@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Retail_PointOfSales
+﻿namespace Retail_PointOfSales
 {
+    // Product Class
     public class Product
     {
-        public string Name { get; set; }
-        public decimal Price { get; set; }
-        public int Quantity { get; set; } = 1; // Default to 0
-        public decimal Amount => Quantity * Price; // Auto-calculated
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public decimal ProductPrice { get; set; }
+        public int Quantity { get; set; } = 0; // Default to 0
+        public decimal Amount => Quantity * ProductPrice; // Auto-calculated
     }
 }
