@@ -45,7 +45,7 @@
 
             <!-- Product List -->
             <ListView x:Name="ProductListView" Height="auto" Grid.Column="0" Grid.Row="0" Margin="0,0,15,0">
-                <ListView.View Width="300">
+                <ListView.View >
                     <GridView>
                         <GridViewColumn Header="Product name" DisplayMemberBinding="{Binding ProductName}" Width="350"/>
                         <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Quantity}" Width="100"/>
@@ -138,13 +138,13 @@
                 </Button>
 
 
-                <!-- Sales History Button -->
-                <Button Width="110" Height="80" Margin="138,10,47,0" Grid.Row="4" Background="#FF1F1D1D" Foreground="AntiqueWhite" Grid.ColumnSpan="2">
+                <!-- Sales Report Button -->
+                <Button Width="110" Height="80" Margin="138,10,47,0" Grid.Row="4" Background="#FF1F1D1D" Foreground="AntiqueWhite" Grid.ColumnSpan="2" Click="SalesReportButton_Click">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
                         <Image Source="Images/end-of-year.png" Width="30" Height="30" Margin="5,10,5,5"/>
                         <!-- Content -->
-                        <TextBlock Text="Sales History" FontSize="14" FontWeight="Bold" TextAlignment="Center"/>
+                        <TextBlock Text="Sales Report" FontSize="14" FontWeight="Bold" TextAlignment="Center"/>
                     </StackPanel>
                 </Button>
 

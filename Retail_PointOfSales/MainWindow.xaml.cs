@@ -224,8 +224,17 @@ namespace Retail_PointOfSales
         {
             CashPayment CashPaymentWindow = new CashPayment();
 
-            // Show the OpeningFund window
+            // Show the CashPayment window
             CashPaymentWindow.ShowDialog();
+        }
+
+        private void SalesReportButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            SalesReport SalesReportWindow = new SalesReport();
+
+            // Show the SalesReport window
+            SalesReportWindow.ShowDialog();
         }
     }
 }
