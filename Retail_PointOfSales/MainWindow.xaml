@@ -118,7 +118,7 @@
                 <Label  Content="Mode of Payment" Height="40" Margin="19,10,47,1" Background="#FF237B23" Grid.Row="2" Foreground="AntiqueWhite" Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
 
                 <!-- Cash Button -->
-                <Button Width="110" Height="80" Margin="10,10,10,0" Grid.Row="3" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite" >
+                <Button Width="110" Height="80" Margin="10,10,10,0" Grid.Row="3" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite" Click="CashPaymentButton_Click" >
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
                         <Image Source="Images/cash.png" Width="30" Height="30" Margin="5,10,5,5"/>

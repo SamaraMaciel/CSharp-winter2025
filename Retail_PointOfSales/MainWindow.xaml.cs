@@ -194,6 +194,8 @@ namespace Retail_PointOfSales
             EndofDayWindow.ShowDialog(); // Show the EndofDay window
         }
 
+
+
         /// <summary>
         /// Deletes the selected product from the cart.
         /// </summary>
@@ -216,6 +218,14 @@ namespace Retail_PointOfSales
             }
             
             TotalTextBlock.Text = $"{total:C}"; // Update the total display with the formatted value
+        }
+
+        private void CashPaymentButton_Click(object sender, RoutedEventArgs e)
+        {
+            CashPayment CashPaymentWindow = new CashPayment();
+
+            // Show the OpeningFund window
+            CashPaymentWindow.ShowDialog();
         }
     }
 }
