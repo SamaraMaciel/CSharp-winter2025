@@ -16,9 +16,6 @@
     <Compile Update="OpeningFund.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Search.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="EndofDay.xaml">
@@ -31,9 +28,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="OpeningFund.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Search.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
