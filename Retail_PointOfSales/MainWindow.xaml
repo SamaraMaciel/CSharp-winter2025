@@ -83,7 +83,8 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Delete Button -->
-                <Button Width="110" Height="80" Margin="5" Grid.Row="0" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite">
+                <Button Width="110" Height="80" Margin="5" Grid.Row="0" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite"
+                        Click="DeleteProduct">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
                         <Image Source= "Images/delete.png" Width="20" Height="20" Margin="5,10,5,5"/>
