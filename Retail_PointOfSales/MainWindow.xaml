@@ -28,9 +28,10 @@
                 <Label Content="Search" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,0,50" Foreground="AntiqueWhite" VerticalContentAlignment="Center" HorizontalAlignment="Center"/>
 
                 <!-- Search TextBox -->
-                <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
-                    <TextBox x:Name="SearchTextBox" Width="300" Height="30" Margin="0,0,0,10" TextChanged="SearchTextBox_TextChanged"/>
-                    <ComboBox x:Name="ProductComboBox" Width="300" IsEditable="False" IsReadOnly="True" SelectionChanged="ProductComboBox_SelectionChanged"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <TextBox x:Name="SearchTextBox" Width="300" Height="30" Margin="0,0,0,40" TextChanged="SearchTextBox_TextChanged"/>
+                    <!-- <ComboBox x:Name="ProductComboBox" Width="300" IsEditable="False" IsReadOnly="True" SelectionChanged="ProductComboBox_SelectionChanged"/> -->
+                    <Button Content="Add Product" Width="80" Height="30" Margin="100,0,0,40" Click="OpenSearchPanel"/>
                 </StackPanel>
             </Grid>
         </StackPanel>
@@ -50,10 +51,10 @@
             <ListView x:Name="ProductListView" Height="auto" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,382,0">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Product name" DisplayMemberBinding="{Binding Name}" Width="300"/>
+                        <GridViewColumn Header="Product name" DisplayMemberBinding="{Binding ProductName}" Width="300"/>
                         <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Quantity}" Width="100"/>
-                        <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}" Width="100"/>
-                        <GridViewColumn Header="Amount" DisplayMemberBinding="{Binding Amount}" Width="100"/>
+                        <GridViewColumn Header="Price" DisplayMemberBinding="{Binding ProductPrice, StringFormat=C}" Width="100"/>
+                        <GridViewColumn Header="Amount" DisplayMemberBinding="{Binding Amount, StringFormat=C}" Width="100"/>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -85,19 +86,9 @@
                 <Button Width="110" Height="80" Margin="5" Grid.Row="0" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
-                        <Image Source= "Images\delete.png" Width="20" Height="20" Margin="5,10,5,5"/>
+                        <Image Source= "Images/delete.png" Width="20" Height="20" Margin="5,10,5,5"/>
                         <!-- Content -->
                         <TextBlock Text="Delete" FontSize="14" FontWeight="Bold" TextAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-
-                <!-- Search Button -->
-                <Button Width="110" Height="80" Margin="5" Grid.Row="0" Grid.Column="1" Background="#FF1F1D1D" Foreground="AntiqueWhite" Click="Button_Click">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                        <!-- Image -->
-                        <Image Source="Images\search.png" Width="20" Height="20" Margin="5,10,5,5"/>
-                        <!-- Content -->
-                        <TextBlock Text="Search" FontSize="14" FontWeight="Bold" TextAlignment="Center"/>
                     </StackPanel>
                 </Button>
 
@@ -105,7 +96,7 @@
                 <Button Width="110" Height="80" Margin="5" Grid.Row="1" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
-                        <Image Source="Images\addQty.png"  Width="20" Height="20" Margin="5,10,5,5"/>
+                        <Image Source="Images/addQty.png"  Width="20" Height="20" Margin="5,10,5,5"/>
                         <!-- Content -->
                         <TextBlock Text="Quantity" FontSize="14" FontWeight="Bold" TextAlignment="Center"/>
                     </StackPanel>
@@ -115,7 +106,7 @@
                 <Button Width="110" Height="80" Margin="5" Grid.Row="1" Grid.Column="1" Background="#FF1F1D1D" Foreground="AntiqueWhite">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
-                        <Image Source= "Images\newSale.png" Width="20" Height="20" Margin="5,10,5,5"/>
+                        <Image Source= "Images/newSale.png" Width="20" Height="20" Margin="5,10,5,5"/>
                         <!-- Content -->
                         <TextBlock Text="New Sale" FontSize="14" FontWeight="Bold" TextAlignment="Center"/>
                     </StackPanel>
@@ -125,7 +116,7 @@
                 <Button Width="110" Height="80" Margin="5" Grid.Row="2" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
-                        <Image Source= "Images\save.png" Width="20" Height="20" Margin="5,10,5,5"/>
+                        <Image Source= "Images/save.png" Width="20" Height="20" Margin="5,10,5,5"/>
                         <!-- Content -->
                         <TextBlock Text="Save Sale" FontSize="14" FontWeight="Bold" TextAlignment="Center"/>
                     </StackPanel>
@@ -135,7 +126,7 @@
                 <Button Width="110" Height="80" Margin="5" Grid.Row="2" Grid.Column="1" Background="#FF1F1D1D" Foreground="AntiqueWhite">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
-                        <Image Source="Images\remove.png" Width="20" Height="20" Margin="5,10,5,5"/>
+                        <Image Source="Images/remove.png" Width="20" Height="20" Margin="5,10,5,5"/>
                         <!-- Content -->
                         <TextBlock Text="Void Sale" FontSize="14" FontWeight="Bold" TextAlignment="Center"/>
                     </StackPanel>
@@ -145,7 +136,7 @@
                 <Button Width="110" Height="80" Margin="5" Grid.Row="3" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite" Click="OpeningFundButton_Click">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
-                        <Image Source= "Images\openingFund.png" Width="30" Height="30" Margin="5,10,5,5"/>
+                        <Image Source= "Images/openingFund.png" Width="30" Height="30" Margin="5,10,5,5"/>
                         <!-- Content -->
                         <TextBlock Text="Opening Fund" FontSize="14" FontWeight="Bold" TextAlignment="Center"/>
                     </StackPanel>
@@ -155,7 +146,7 @@
                 <Button Width="110" Height="80" Margin="5" Grid.Row="3" Grid.Column="1" Background="#FF1F1D1D" Foreground="AntiqueWhite">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
-                        <Image Source="Images\closing.png" Width="30" Height="30" Margin="5,10,5,5"/>
+                        <Image Source="Images/closing.png" Width="30" Height="30" Margin="5,10,5,5"/>
                         <!-- Content -->
                         <TextBlock Text="Close Sale" FontSize="14" FontWeight="Bold" TextAlignment="Center"/>
                     </StackPanel>
@@ -168,7 +159,7 @@
                 <Button Width="110" Height="80" Margin="5" Grid.Row="5" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
-                        <Image Source="Images\cash.png" Width="30" Height="30" Margin="5,10,5,5"/>
+                        <Image Source="Images/cash.png" Width="30" Height="30" Margin="5,10,5,5"/>
                         <!-- Content -->
                         <TextBlock Text="Cash" FontSize="14" FontWeight="Bold" TextAlignment="Center"/>
                     </StackPanel>
@@ -178,7 +169,7 @@
                 <Button Width="110" Height="80" Margin="5" Grid.Row="5" Grid.Column="1" Background="#FF1F1D1D" Foreground="AntiqueWhite">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
-                        <Image Source="Images\credit-card.png" Width="30" Height="30" Margin="5,10,5,5"/>
+                        <Image Source="Images/credit-card.png" Width="30" Height="30" Margin="5,10,5,5"/>
                         <!-- Content -->
                         <TextBlock Text="Credit Card" FontSize="14" FontWeight="Bold" TextAlignment="Center"/>
                     </StackPanel>
@@ -188,7 +179,7 @@
                 <Button Width="110" Height="80" Margin="5" Grid.Row="7" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
-                        <Image Source="Images\endDay.png" Width="30" Height="30" Margin="5,10,5,5"/>
+                        <Image Source="Images/endDay.png" Width="30" Height="30" Margin="5,10,5,5"/>
                         <!-- Content -->
                         <TextBlock Text="End of Day" FontSize="14" FontWeight="Bold" TextAlignment="Center"/>
                     </StackPanel>
@@ -198,21 +189,46 @@
                 <Button Width="110" Height="80" Margin="5" Grid.Row="7" Grid.Column="1" Background="#FF1F1D1D" Foreground="AntiqueWhite">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
-                        <Image Source="Images\end-of-year.png" Width="30" Height="30" Margin="5,10,5,5"/>
+                        <Image Source="Images/end-of-year.png" Width="30" Height="30" Margin="5,10,5,5"/>
                         <!-- Content -->
                         <TextBlock Text="Sales History" FontSize="14" FontWeight="Bold" TextAlignment="Center"/>
                     </StackPanel>
                 </Button>
             </Grid>
+            
+            <Grid Grid.Row="0" Grid.Column="0">
+                <!-- Search Panel (Hidden Initially) -->
+                <Border x:Name="SearchPanel" Background="White" Visibility="Collapsed"
+                        BorderBrush="Black" BorderThickness="2" Padding="10"
+                        VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel>
+                        <TextBox x:Name="SearchTextBox2"/>
+                        <Button Content="Search" Width="100" Margin="10,0,0,0" Click="SearchButton_Click"  />
+                        <ListView x:Name="SearchPanel_ProductList" SelectionChanged="ProductSelected">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding ProductId}" Width="100"></GridViewColumn>
+                                    <GridViewColumn Header="Product Name" DisplayMemberBinding="{Binding ProductName, StringFormat=C}" Width="150" />
+                                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding ProductPrice, StringFormat=C}" Width="100"></GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Button Content="Close" Click="CloseSearchPanel"/>
+                    </StackPanel>
+                </Border>
 
-            <!-- Date Label and TextBox 
-            <StackPanel Grid.Row="8" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="5">
-                <Label Content="Date:" Width="50" Height="30" Foreground="AntiqueWhite" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <TextBox Name="DateTextBox" Width="100" Height="30"  Background="White" Foreground="Black" IsReadOnly="True" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-
-                <Label Content="Time:" Width="50" Height="30" Foreground="AntiqueWhite" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,0,0"/>
-                <TextBox Name="TimeTextBox" Width="100" Height="30"  Background="White" Foreground="Black" IsReadOnly="True" VerticalAlignment="Center" HorizontalAlignment="Center" />
-            </StackPanel>-->
+                <!-- Quantity Panel (Hidden Initially) -->
+                <Border x:Name="QuantityPanel" Background="White" Visibility="Collapsed"
+                        BorderBrush="Black" BorderThickness="2" Padding="10"
+                        VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel>
+                        <TextBlock x:Name="SelectedProductText" FontWeight="Bold"/>
+                        <TextBox x:Name="QuantityTextBox"/>
+                        <Button Content="Confirm" Click="ConfirmQuantity"/>
+                        <Button Content="Cancel" Click="CloseQuantityPanel"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
 
             <!-- Centered Date and Time -->
             <Grid Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">

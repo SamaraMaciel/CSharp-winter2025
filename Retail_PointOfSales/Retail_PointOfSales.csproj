@@ -46,21 +46,38 @@
     <Resource Include="Images\10C.png" />
     <None Remove="Images\25C.png" />
     <Resource Include="Images\25C.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="AddItem.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <XamlRuntime>Wpf</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="AddItem.xaml.cs">
-      <SubType>Code</SubType>
-      <DependentUpon>AddItem.xaml</DependentUpon>
-    </Compile>
+    <None Remove="JSON\user.json" />
+    <Resource Include="JSON\user.json" />
+    <None Remove="Images\addQty.png" />
+    <Resource Include="Images\addQty.png" />
+    <None Remove="Images\calendar.png" />
+    <Resource Include="Images\calendar.png" />
+    <None Remove="Images\cash.png" />
+    <Resource Include="Images\cash.png" />
+    <None Remove="Images\closing.png" />
+    <Resource Include="Images\closing.png" />
+    <None Remove="Images\credit-card.png" />
+    <Resource Include="Images\credit-card.png" />
+    <None Remove="Images\cross.png" />
+    <Resource Include="Images\cross.png" />
+    <None Remove="Images\delete.png" />
+    <Resource Include="Images\delete.png" />
+    <None Remove="Images\end-of-year.png" />
+    <Resource Include="Images\end-of-year.png" />
+    <None Remove="Images\endDay.png" />
+    <Resource Include="Images\endDay.png" />
+    <None Remove="Images\money-simple-from-bracket.png" />
+    <Resource Include="Images\money-simple-from-bracket.png" />
+    <None Remove="Images\newSale.png" />
+    <Resource Include="Images\newSale.png" />
+    <None Remove="Images\openingFund.png" />
+    <Resource Include="Images\openingFund.png" />
+    <None Remove="Images\remove.png" />
+    <Resource Include="Images\remove.png" />
+    <None Remove="Images\save.png" />
+    <Resource Include="Images\save.png" />
+    <None Remove="Images\search.png" />
+    <Resource Include="Images\search.png" />
   </ItemGroup>
 
 </Project>
