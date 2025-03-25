@@ -1,0 +1,63 @@
+﻿<Window x:Class="Retail_PointOfSales.CashPayment"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Retail_PointOfSales"
+        mc:Ignorable="d"
+        Title="Cash Payment" MaxHeight="450" MaxWidth="500">
+    <Grid Margin="10"  Background="Black">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header Section -->
+        <TextBlock Grid.Row="0" Text="CASH PAYMENT"  FontSize="20" FontWeight="Bold" Foreground="#FFF0A61C" 
+                   TextAlignment="Left" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,10,0,20" 
+                   Grid.Column="0"  Grid.ColumnSpan="2"  Width="320"  />
+
+        <!-- Payment Labels and Values -->
+        <!-- TOTAL SALES -->
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="TOTAL SALE :" FontWeight="Bold" VerticalAlignment="Center" Margin="15" Foreground="#FF13E7F7" FontSize="20"/>
+        <TextBox Name="TotalSalesTextBox" Grid.Row="1" Grid.Column="1" Width="100" Height="30" Margin="20,0,0,0" Text="0.00" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" 
+                 Background="Black" Foreground="White" FontWeight="Bold" BorderThickness="0"/>
+
+        <!-- DISCOUNT -->
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="DISCOUNT :" FontWeight="Bold" VerticalAlignment="Center" Margin="15" Foreground="#FF5D5F5F" FontSize="20"/>
+        <TextBox Name="DiscountTextBox" Grid.Row="2" Grid.Column="1" Width="100" Height="30" Margin="20,0,0,0" Text="0.00" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20"
+                 Foreground="#FF5D5F5F" FontWeight="Bold" BorderThickness="0" Background="Black"/>
+
+        <!-- GRAND TOTAL -->
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="GRAND TOTAL :" FontWeight="Bold" VerticalAlignment="Center" Margin="15" Foreground="Yellow" FontSize="20"/>
+        <TextBox Name="GrandTotalTextBox" Grid.Row="3" Grid.Column="1" Width="100" Height="30" Margin="20,0,0,0" Text="0.00" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20"
+                 Foreground="#FFF0A61C" FontWeight="Bold" BorderThickness="0" Background="Black"/>
+
+        <!-- CASH TENDERERED -->
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="CASH TENDERED :" FontWeight="Bold" VerticalAlignment="Center" Margin="15" Foreground="#FF13E7F7" FontSize="20"/>
+        <TextBox Name="CashTenderedTextBox"  Grid.Row="4" Grid.Column="1" Width="100" Height="30" Margin="20,0,0,0" Text="0.00" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20"
+                 Foreground="White" FontWeight="Bold" BorderThickness="0" Background="Black"/>
+
+        <!-- CHANGE -->
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="CHANGE :" FontWeight="Bold" VerticalAlignment="Center" Margin="15" Foreground="#FF13E7F7" FontSize="20"/>
+        <TextBox Name="ChangeTextBox" Grid.Row="5" Grid.Column="1" Width="100" Height="30" Margin="20,0,0,0" Text="0.00" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" 
+                 Foreground="Yellow" FontWeight="Bold" BorderThickness="0" Background="Black"/>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0" Grid.Column="1" Height="50" Width="220">
+            <Button Content="Enter" Width="100" Height="40" Margin="5" Background="Green" Foreground="White" VerticalAlignment="Center" Click="EnterButton_Click"/>
+            <Button Content="Cancel" Width="100" Height="40" Margin="5" Background="Red" Foreground="White" VerticalAlignment="Center" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+
+</Window>
