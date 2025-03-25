@@ -5,28 +5,38 @@ namespace Retail_PointOfSales
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
+    /// This class represents the main window of the Retail Point of Sale system.
+    /// It handles user interactions, including updating the date and time, searching for products,
+    /// adding products to the cart, and managing the sale process.
     /// </summary>
     public partial class MainWindow : Window
     {
         private List<Product> _products;
-        //Initializing the actual date and time and setting it to the actualDate variable
+        // Initializing the actual date and time and setting it to the actualDate variable
         DateTime actualDate = DateTime.Now;
      
         private Product selectedProduct;
         ProductManager productManager = new ();
         
+        /// <summary>
+        /// Initializes the MainWindow.
+        /// This constructor initializes the components and sets up a timer that updates the time every second.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
-            //MainContent.Content = new Login(); 
+            // MainContent.Content = new Login(); 
 
-            // Initializes a new instance of the Timer class that raises an event at every 1000 milliseconds (1 second)
+            // Initializes a new instance of the Timer class that raises an event every 1000 milliseconds (1 second)
             var timer = new System.Timers.Timer(1000);
-            timer.Elapsed += dispatcherTimer_Tick; //Setting event handler for the timer interval
-            timer.Start(); // Startig the timer
+            timer.Elapsed += dispatcherTimer_Tick; // Setting event handler for the timer interval
+            timer.Start(); // Starting the timer
         }
 
-        // Event handler for the timer interval
+        /// <summary>
+        /// Event handler for the timer interval.
+        /// Updates the actual date and time and sets the DateTextBox and TimeTextBox in the UI.
+        /// </summary>
         public void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             actualDate = DateTime.Now;
@@ -38,19 +48,30 @@ namespace Retail_PointOfSales
             });
         }
 
-        // Search Text Box from the JSON File
+        /// <summary>
+        /// Event handler for the TextChanged event of the Search TextBox.
+        /// Placeholder functionality for implementing a search feature using a combo box.
+        /// </summary>
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             // Just placeholder functionality if we want a combo box search
             // We can omit this if we don't have enough time
         }
 
+        /// <summary>
+        /// Event handler for the SelectionChanged event of the Product ComboBox.
+        /// Placeholder functionality for implementing a combo box search.
+        /// </summary>
         private void ProductComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Just placeholder functionality if we want a combo box search
             // We can omit this if we don't have enough time
         }
 
+        /// <summary>
+        /// Event handler for the Opening Fund Button click.
+        /// Opens a new window to handle the opening fund process.
+        /// </summary>
         private void OpeningFundButton_Click(object sender, RoutedEventArgs e)
         {
             // Create an instance of the OpeningFund window
@@ -59,105 +80,142 @@ namespace Retail_PointOfSales
             // Show the OpeningFund window
             openingFundWindow.ShowDialog();
         }
-        
+
+        /// <summary>
+        /// Opens the search panel and loads all products into the search list.
+        /// </summary>
         private void OpenSearchPanel(object sender, RoutedEventArgs e)
         {
             SearchPanel.Visibility = Visibility.Visible;
             SearchPanel_ProductList.ItemsSource = productManager.LoadAllProducts(); // Load Products
         }
-        
-        // Close Search Panel
+
+        /// <summary>
+        /// Closes the search panel.
+        /// </summary>
         private void CloseSearchPanel(object sender, RoutedEventArgs e)
         {
             SearchPanel.Visibility = Visibility.Collapsed;
         }
-        
-        
+
+        /// <summary>
+        /// Event handler for the product selection event in the search panel.
+        /// Selects a product and opens the quantity input panel.
+        /// </summary>
         private void ProductSelected(object sender, SelectionChangedEventArgs e)
         {
+            // if the selected product in the list is of type Product
             if (SearchPanel_ProductList.SelectedItem is Product product)
             {
-                selectedProduct = product;
-                SearchPanel.Visibility = Visibility.Collapsed; // Hide search panel
-                OpenQuantityPanel();
+                selectedProduct = product; // Set the selected product information
+                SearchPanel.Visibility = Visibility.Collapsed; // Hide the search panel
+                OpenQuantityPanel(); // Open the quantity panel
             }
         }
-        
-        // Open Quantity Panel
+
+        /// <summary>
+        /// Opens the quantity input panel to allow the user to input the quantity of the selected product.
+        /// </summary>
         private void OpenQuantityPanel()
         {
+            // If no product is selected, prevent opening the panel
             if (selectedProduct == null) return;
+            // Set the product name to the selected product text
             SelectedProductText.Text = $"Enter quantity for {selectedProduct.ProductName}:";
-            QuantityPanel.Visibility = Visibility.Visible;
+            QuantityPanel.Visibility = Visibility.Visible; // Show the quantity panel
         }
-        
-        // Close Quantity Panel
+
+        /// <summary>
+        /// Closes the quantity input panel.
+        /// </summary>
         private void CloseQuantityPanel(object sender, RoutedEventArgs e)
         {
-            QuantityPanel.Visibility = Visibility.Collapsed;
+            QuantityPanel.Visibility = Visibility.Collapsed; // Hide the quantity panel
         }
-        
-        // Confirm Quantity and Add to Cart
+
+        /// <summary>
+        /// Confirms the quantity entered by the user and adds the selected product to the cart.
+        /// </summary>
         private void ConfirmQuantity(object sender, RoutedEventArgs e)
         {
             if (int.TryParse(QuantityTextBox.Text, out int quantity) && quantity > 0)
             {
-                AddProductToCart(selectedProduct, quantity);
-                QuantityPanel.Visibility = Visibility.Collapsed;
+                AddProductToCart(selectedProduct, quantity); // Add product to the cart
+                QuantityPanel.Visibility = Visibility.Collapsed; // Close the quantity panel
             }
             else
             {
-                MessageBox.Show("Please enter a valid quantity.");
+                MessageBox.Show("Please enter a valid quantity."); // Show an error message
             }
         }
-        
-        // Add Product to Cart
+
+        /// <summary>
+        /// Adds the selected product to the cart with the specified quantity.
+        /// </summary>
         private void AddProductToCart(Product product, int quantity)
         {
-            decimal total = 0;
             Product productToAdd = new Product
             {
                 ProductName = product.ProductName,
                 ProductPrice = product.ProductPrice,
                 Quantity = quantity,
             };
-            
-            ProductListView.Items.Add(productToAdd);
-            
-            foreach (Product item in ProductListView.Items)
-            {
-                total += item.Amount;
-            }
-            
-            TotalTextBlock.Text = $"{total:C}";
+            QuantityTextBox.Text = ""; // Clear the quantity textbox
+            ProductListView.Items.Add(productToAdd); // Add product to the list view
+            UpdateSaleTotal(); // Update the sale total
         }
-        
+
+        /// <summary>
+        /// Searches for products based on the search input and displays matching products.
+        /// </summary>
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            string searchText = SearchTextBox2.Text.ToLower(); // text input by user
-            // call search function from ProductManager class passing the text as argument to search for it.
-            var result= productManager.Search(searchText);
+            string searchText = SearchTextBox2.Text.ToLower(); // Get the search text from user input
+            var result = productManager.Search(searchText); // Search for matching products
             if (result != null)
             {
-                // if not null, then the list will render all products that matches with the searchText
+                // If products are found, display them in the search panel
                 SearchPanel_ProductList.ItemsSource = result;
             }
             else
             {
-                // Otherwise an error message will be displayed
-                MessageBox.Show("Product not found. Please try again.", "Product not found.", 
+                // If no products are found, show an error message
+                MessageBox.Show("Product not found. Please try again.", "Product not found", 
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        //Trigger the EndofDay Window
+        /// <summary>
+        /// Opens the End of Day window.
+        /// </summary>
         private void EndofDayButton_Click(object sender, RoutedEventArgs e)
         {
-            // Create an instance of the EndofDay window
             EndofDay EndofDayWindow = new EndofDay();
+            EndofDayWindow.ShowDialog(); // Show the EndofDay window
+        }
 
-            // Show the EndofDay window
-            EndofDayWindow.ShowDialog();
+        /// <summary>
+        /// Deletes the selected product from the cart.
+        /// </summary>
+        private void DeleteProduct(object sender, RoutedEventArgs e)
+        {
+            int productToRemove = ProductListView.SelectedIndex; // Get the selected product index
+            ProductListView.Items.RemoveAt(productToRemove); // Remove the product from the list
+            UpdateSaleTotal(); // Update the sale total
+        }
+
+        /// <summary>
+        /// Updates the total sale amount by summing up the prices of the items in the cart.
+        /// </summary>
+        private void UpdateSaleTotal()
+        {
+            decimal total = 0;
+            foreach (Product item in ProductListView.Items)
+            {
+                total += item.Amount; // Sum the product prices
+            }
+            
+            TotalTextBlock.Text = $"{total:C}"; // Update the total display with the formatted value
         }
     }
 }

@@ -74,7 +74,8 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Delete Button -->
-                <Button Width="110" Height="80" Margin="10,0,10,0" Grid.Row="0" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite">
+                <Button Width="110" Height="80" Margin="5" Grid.Row="0" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite"
+                        Click="DeleteProduct">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
                         <Image Source= "Images/delete.png" Width="20" Height="20" Margin="5,10,5,5"/>
@@ -147,11 +148,7 @@
                     </StackPanel>
                 </Button>
 
-                <!-- Total -->
-                <StackPanel Orientation="Horizontal"  Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0">
-                    <TextBlock Text="TOTAL :" Margin="5" FontWeight="Bold" Foreground="AntiqueWhite" />
-                    <TextBlock Text="0.00" Margin="5" FontWeight="Bold" x:Name="TotalTextBlock" Foreground="AntiqueWhite"  />
-                </StackPanel>
+                
             </Grid>
 
             <Grid Grid.Row="0" Grid.Column="0">
@@ -192,9 +189,7 @@
             <Grid Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10,10,10,10" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*" />
-                    <!-- Increase relative width of the first column -->
                     <ColumnDefinition Width="1*" />
-                    <!-- Set adequate space for the second column -->
                 </Grid.ColumnDefinitions>
 
                 <!-- Date & Time -->
@@ -203,6 +198,12 @@
                     <TextBox x:Name="DateTextBox" Width="100" IsReadOnly="True" Margin="5" />
                     <Label Content="Time:" Foreground="AntiqueWhite" Margin="5" />
                     <TextBox x:Name="TimeTextBox" Width="100" IsReadOnly="True" Margin="5" />
+                </StackPanel>
+
+                <!-- Total -->
+                <StackPanel Orientation="Horizontal"  Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0">
+                    <TextBlock Text="TOTAL :" Margin="5" FontWeight="Bold" Foreground="AntiqueWhite" />
+                    <TextBlock Text="0.00" Margin="5" FontWeight="Bold" x:Name="TotalTextBlock" Foreground="AntiqueWhite"  />
                 </StackPanel>
             </Grid>
         </Grid>
