@@ -1,23 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace Retail_PointOfSales
 {
     /// <summary>
     /// Interaction logic for LoginWIndow.xaml
     /// </summary>
-    public partial class LoginWIndow : Window
+    public partial class LoginWIndow
     {
         public LoginWIndow()
         {
@@ -33,6 +21,14 @@ namespace Retail_PointOfSales
         {
             string username = UsernameTextBox.Text; // UserName entered by the user
             string password = PasswordBox.Password; // Password entered by the user
+            
+            // if username or password are empty, show a message.
+            if (username == "" || password == "")
+            {
+                MessageBox.Show("Username and password are required", "Login Failed", 
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             
             UserManager userManager = new UserManager(); // Create a new instance of the UserManager class
             
