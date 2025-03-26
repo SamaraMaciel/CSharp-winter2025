@@ -6,6 +6,18 @@
         xmlns:local="clr-namespace:Retail_PointOfSales"
         mc:Ignorable="d"
         Title="LoginWIndow" Height="450" Width="800">
+
+    <Window.Resources>
+        <RoutedCommand x:Key="LoginCommand" />
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource LoginCommand}" 
+                        Executed="LoginButton_Click"/>
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Command="{StaticResource LoginCommand}" Key="Enter"/>
+    </Window.InputBindings>
+
     <Grid>
         <TextBlock Text="User Login" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,20,0,0" />
 
