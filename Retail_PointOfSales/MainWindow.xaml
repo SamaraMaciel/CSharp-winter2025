@@ -5,14 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Retail_PointOfSales"
         mc:Ignorable="d"
-       Title="MainWindow" Height="800" MaxWidth="1000" Background="Gray">
+       Title="MainWindow" Height="750" MaxWidth="1000" Background="Gray">
 
     <Grid >
         <!-- <ContentControl Name="MainContent"/> -->
         <StackPanel Margin="0,-10,0,20" Background="#FF1F1D1D">
             <!-- Title -->
-            <TextBlock Text="POINT OF SALE" FontSize="16" FontWeight="Bold" Margin="10,0,0,10" Foreground="Black" Background="#FF0DC3EB"/>
-
+            <Grid Margin="0,0,0,10" Background="Aqua">
+            <TextBlock Text="POINT OF SALE" FontSize="16" FontWeight="Bold" Margin="10,0,0,0" Foreground="Black" FontFamily="Gadugi" />
+            </Grid>
+            
             <!-- Search Row -->
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -27,7 +29,7 @@
                 <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
                     <TextBox x:Name="SearchTextBox" Width="500" Height="30" Margin="0,0,0,40" TextChanged="SearchTextBox_TextChanged"/>
                     <!-- <ComboBox x:Name="ProductComboBox" Width="300" IsEditable="False" IsReadOnly="True" SelectionChanged="ProductComboBox_SelectionChanged"/> -->
-                    <Button Content="Add Product" Width="85" Height="30" Margin="20,0,0,40" Click="OpenSearchPanel"/>
+                    <Button Content="Add Product" Width="85" Height="30" Margin="20,0,0,40" Click="OpenSearchPanel" FontWeight="SemiBold" />
                 </StackPanel>
             </Grid>
         </StackPanel>
@@ -44,7 +46,7 @@
             </Grid.ColumnDefinitions>
 
             <!-- Product List -->
-            <ListView x:Name="ProductListView" Height="auto" Grid.Column="0" Grid.Row="0" Margin="0,0,15,0">
+            <ListView x:Name="ProductListView" Height="auto" Grid.Column="0" Grid.Row="0" Margin="0,0,15,0" BorderBrush="Aqua">
                 <ListView.View >
                     <GridView>
                         <GridViewColumn Header="Product name" DisplayMemberBinding="{Binding ProductName}" Width="350"/>
@@ -55,8 +57,6 @@
                 </ListView.View>
             </ListView>
 
-           
-
             <!-- Right Panel -->
             <Grid Margin="665,10,30,10" Grid.RowSpan="2" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
@@ -65,17 +65,17 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <!-- Delete Button -->
                 <Button Width="110" Height="80" Margin="5" Grid.Row="0" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite"
-                        Click="DeleteProduct">
+                        Click="DeleteProduct" BorderBrush="Aqua" >
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
                         <Image Source= "Images/delete.png" Width="20" Height="20" Margin="5,10,5,5"/>
@@ -85,7 +85,8 @@
                 </Button>
 
                 <!-- Void Order Button -->
-                <Button Width="110" Height="80" Margin="100,0,10,0" Grid.Row="0" Background="#FF1F1D1D" Foreground="AntiqueWhite" Grid.ColumnSpan="2">
+                <Button Width="110" Height="80" Margin="100,0,10,0" Grid.Row="0" Background="Red" Foreground="AntiqueWhite" 
+                        Grid.ColumnSpan="2" BorderBrush="Aqua" >
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
                         <Image Source="Images/remove.png" Width="20" Height="20" Margin="5,10,5,5"/>
@@ -95,7 +96,8 @@
                 </Button>
 
                 <!-- Opening Fund Button -->
-                <Button Width="110" Height="80" Margin="10,10,10,0" Grid.Row="1" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite" Click="OpeningFundButton_Click">
+                <Button Width="110" Height="80" Margin="10,10,10,0" Grid.Row="1" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite" 
+                        Click="OpeningFundButton_Click" BorderBrush="Aqua">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
                         <Image Source= "Images/openingFund.png" Width="30" Height="30" Margin="5,10,5,5"/>
@@ -105,7 +107,8 @@
                 </Button>
 
                 <!-- End of Day Sales Button -->
-                <Button Width="110" Height="80" Margin="100,10,10,0" Grid.Row="1" Background="#FF1F1D1D" Foreground="AntiqueWhite" Click="EndofDayButton_Click" Grid.ColumnSpan="2">
+                <Button Width="110" Height="80" Margin="100,10,10,0" Grid.Row="1" Background="#FF1F1D1D" Foreground="AntiqueWhite" 
+                        Click="EndofDayButton_Click" Grid.ColumnSpan="2" BorderBrush="Aqua">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
                         <Image Source="Images/endDay.png" Width="30" Height="30" Margin="5,10,5,5"/>
@@ -115,10 +118,10 @@
                 </Button>
 
                 <!-- Mode of Payment -->
-                <Label  Content="Mode of Payment" Height="40" Margin="19,10,47,1" Background="#FF237B23" Grid.Row="2" Foreground="AntiqueWhite" Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-
+                <Label  Content="Mode of Payment" Height="30" Margin="19,10,47,1" Background="#FF237B23" Grid.Row="2" Foreground="AntiqueWhite" Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
                 <!-- Cash Button -->
-                <Button Width="110" Height="80" Margin="10,10,10,0" Grid.Row="3" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite" Click="CashPaymentButton_Click" >
+                <Button Width="110" Height="80" Margin="10,10,10,0" Grid.Row="3" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite" 
+                        Click="CashPaymentButton_Click" BorderBrush="Aqua">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
                         <Image Source="Images/cash.png" Width="30" Height="30" Margin="5,10,5,5"/>
@@ -128,7 +131,8 @@
                 </Button>
 
                 <!-- Credit Card Button -->
-                <Button Width="110" Height="80" Margin="100,10,10,0" Grid.Row="3" Background="#FF1F1D1D" Foreground="AntiqueWhite"  Grid.ColumnSpan="2" >
+                <Button Width="110" Height="80" Margin="100,10,10,0" Grid.Row="3" Background="#FF1F1D1D" Foreground="AntiqueWhite"  
+                        Grid.ColumnSpan="2" BorderBrush="Aqua">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
                         <Image Source="Images/credit-card.png" Width="30" Height="30" Margin="5,10,5,5"/>
@@ -137,9 +141,12 @@
                     </StackPanel>
                 </Button>
 
-
+                <Border Grid.Row="4"  Background="Yellow" Width="230" Height="5" Margin="10,10,0,0" 
+                        VerticalAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+                
                 <!-- Sales Report Button -->
-                <Button Width="110" Height="80" Margin="138,10,47,0" Grid.Row="4" Background="#FF1F1D1D" Foreground="AntiqueWhite" Grid.ColumnSpan="2" Click="SalesReportButton_Click">
+                <Button Width="110" Height="80" Margin="10,10,10,0" Grid.Row="5" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite" 
+                        Click="SalesReportButton_Click" BorderBrush="Aqua" >
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
                         <Image Source="Images/end-of-year.png" Width="30" Height="30" Margin="5,10,5,5"/>
@@ -148,7 +155,6 @@
                     </StackPanel>
                 </Button>
 
-                
             </Grid>
 
             <Grid Grid.Row="0" Grid.Column="0">
@@ -159,7 +165,7 @@
                     <StackPanel>
                         <TextBox x:Name="SearchTextBox2"/>
                         <Button Content="Search" Width="100" Margin="10,0,0,0" Click="SearchButton_Click"  />
-                        <ListView x:Name="SearchPanel_ProductList" SelectionChanged="ProductSelected">
+                        <ListView x:Name="SearchPanel_ProductList" SelectionChanged="ProductSelected" BorderBrush="Aqua">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding ProductId}" Width="100"></GridViewColumn>
@@ -195,15 +201,15 @@
                 <!-- Date & Time -->
                 <StackPanel Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Stretch">
                     <Label Content="Date:" Foreground="AntiqueWhite" Margin="5" />
-                    <TextBox x:Name="DateTextBox" Width="100" IsReadOnly="True" Margin="5" />
+                    <TextBox x:Name="DateTextBox" Width="100" Height="30" IsReadOnly="True" Margin="5" />
                     <Label Content="Time:" Foreground="AntiqueWhite" Margin="5" />
-                    <TextBox x:Name="TimeTextBox" Width="100" IsReadOnly="True" Margin="5" />
+                    <TextBox x:Name="TimeTextBox" Width="100" Height="30" IsReadOnly="True" Margin="5" />
                 </StackPanel>
 
                 <!-- Total -->
-                <StackPanel Orientation="Horizontal"  Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0">
-                    <TextBlock Text="TOTAL :" Margin="5" FontWeight="Bold" Foreground="AntiqueWhite" />
-                    <TextBlock Text="0.00" Margin="5" FontWeight="Bold" x:Name="TotalTextBlock" Foreground="AntiqueWhite"  />
+                <StackPanel Orientation="Horizontal"  Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,30,0">
+                    <TextBlock Text="TOTAL :" Margin="5" FontWeight="Bold" Foreground="AntiqueWhite" FontSize="30" />
+                    <TextBlock Text="0.00" Margin="5" FontWeight="Bold" x:Name="TotalTextBlock" Foreground="AntiqueWhite" FontSize="30" />
                 </StackPanel>
             </Grid>
         </Grid>
