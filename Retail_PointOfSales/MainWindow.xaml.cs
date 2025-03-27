@@ -237,7 +237,7 @@ namespace Retail_PointOfSales
             SalesReportWindow.ShowDialog();
         }
 
-        private void CreditPaymentButton_Clickutton_Click(object sender, RoutedEventArgs e)
+        private void CreditPaymentButton_Click(object sender, RoutedEventArgs e)
         {
 
             CreditPayment CreditPaymentWindow = new CreditPayment();

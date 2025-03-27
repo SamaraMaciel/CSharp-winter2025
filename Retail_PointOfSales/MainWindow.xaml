@@ -118,7 +118,8 @@
                 </Button>
 
                 <!-- Mode of Payment -->
-                <Label  Content="Mode of Payment" Height="30" Margin="19,10,47,1" Background="#FF237B23" Grid.Row="2" Foreground="AntiqueWhite" Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                <Label  Content="Mode of Payment" Height="30" Margin="19,10,47,1" Background="#FF237B23" Grid.Row="2" Foreground="AntiqueWhite" 
+                        Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
                 <!-- Cash Button -->
                 <Button Width="110" Height="80" Margin="10,10,10,0" Grid.Row="3" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite" 
                         Click="CashPaymentButton_Click" BorderBrush="Aqua">
@@ -131,7 +132,7 @@
                 </Button>
 
                 <!-- Credit Card Button -->
-                <Button Height="80" Margin="110,10,20,0" Grid.Row="3" Background="#FF1F1D1D" Foreground="AntiqueWhite"  
+                <Button Width="110" Height="80" Margin="110,10,20,0" Grid.Row="3" Background="#FF1F1D1D" Foreground="AntiqueWhite"  
                         Grid.ColumnSpan="2" BorderBrush="Aqua" Click="CreditPaymentButton_Click">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
