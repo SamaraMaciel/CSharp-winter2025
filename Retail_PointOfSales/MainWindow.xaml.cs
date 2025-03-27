@@ -236,5 +236,14 @@ namespace Retail_PointOfSales
             // Show the SalesReport window
             SalesReportWindow.ShowDialog();
         }
+
+        private void CreditPaymentButton_Clickutton_Click(object sender, RoutedEventArgs e)
+        {
+
+            CreditPayment CreditPaymentWindow = new CreditPayment();
+
+            // Show the CreditPayment window
+            CreditPaymentWindow.ShowDialog();
+        }
     }
 }

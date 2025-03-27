@@ -12,9 +12,9 @@
         <StackPanel Margin="0,-10,0,20" Background="#FF1F1D1D">
             <!-- Title -->
             <Grid Margin="0,0,0,10" Background="Aqua">
-            <TextBlock Text="POINT OF SALE" FontSize="16" FontWeight="Bold" Margin="10,0,0,0" Foreground="Black" FontFamily="Gadugi" />
+                <TextBlock Text="POINT OF SALE" FontSize="16" FontWeight="Bold" Margin="10,0,0,0" Foreground="Black" FontFamily="Gadugi" />
             </Grid>
-            
+
             <!-- Search Row -->
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -131,8 +131,8 @@
                 </Button>
 
                 <!-- Credit Card Button -->
-                <Button Width="110" Height="80" Margin="100,10,10,0" Grid.Row="3" Background="#FF1F1D1D" Foreground="AntiqueWhite"  
-                        Grid.ColumnSpan="2" BorderBrush="Aqua">
+                <Button Height="80" Margin="110,10,20,0" Grid.Row="3" Background="#FF1F1D1D" Foreground="AntiqueWhite"  
+                        Grid.ColumnSpan="2" BorderBrush="Aqua" Click="CreditPaymentButton_Click">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <!-- Image -->
                         <Image Source="Images/credit-card.png" Width="30" Height="30" Margin="5,10,5,5"/>
@@ -143,7 +143,7 @@
 
                 <Border Grid.Row="4"  Background="Yellow" Width="230" Height="5" Margin="10,10,0,0" 
                         VerticalAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
-                
+
                 <!-- Sales Report Button -->
                 <Button Width="110" Height="80" Margin="10,10,10,0" Grid.Row="5" Grid.Column="0" Background="#FF1F1D1D" Foreground="AntiqueWhite" 
                         Click="SalesReportButton_Click" BorderBrush="Aqua" >
