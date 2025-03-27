@@ -202,6 +202,7 @@ namespace Retail_PointOfSales
         private void DeleteProduct(object sender, RoutedEventArgs e)
         {
             int productToRemove = ProductListView.SelectedIndex; // Get the selected product index
+            if (productToRemove.Equals(-1)) return; // Prevents exceptions when clicking delete button with no product selected
             ProductListView.Items.RemoveAt(productToRemove); // Remove the product from the list
             UpdateSaleTotal(); // Update the sale total
         }
@@ -217,12 +218,21 @@ namespace Retail_PointOfSales
                 total += item.Amount; // Sum the product prices
             }
             
-            TotalTextBlock.Text = $"{total:C}"; // Update the total display with the formatted value
+            TotalTextBlock.Text = total.ToString(); // Update the total display with the formatted value
         }
 
         private void CashPaymentButton_Click(object sender, RoutedEventArgs e)
         {
-            CashPayment CashPaymentWindow = new CashPayment();
+            Sale sale = new Sale
+            {
+                Products = _products,
+                PaymentMethod = PaymentMethod.Cash,
+                SaleId = "keuhfudfh",
+                Subtotal = decimal.Parse(TotalTextBlock.Text),
+                Total = decimal.Parse(TotalTextBlock.Text)
+            };
+            
+            CashPayment CashPaymentWindow = new CashPayment(sale);
 
             // Show the CashPayment window
             CashPaymentWindow.ShowDialog();
@@ -244,6 +254,11 @@ namespace Retail_PointOfSales
 
             // Show the CreditPayment window
             CreditPaymentWindow.ShowDialog();
+        }
+
+        private void CreditPaymentButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

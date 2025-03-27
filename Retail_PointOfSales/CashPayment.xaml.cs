@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Retail_PointOfSales
 {
@@ -19,36 +9,53 @@ namespace Retail_PointOfSales
     /// </summary>
     public partial class CashPayment : Window
     {
-        public CashPayment()
+        Sale closingSale;
+        public CashPayment(Sale sale)
         {
+            closingSale = sale;
             InitializeComponent();
+            SubtotalSalesTextBox.Text = closingSale.Subtotal.ToString();
+            TotalTextBox.Text = closingSale.Total.ToString();
         }
-
-        private void CalculateGrandTotalAndChange()
+        
+        private void CalculateTotal(object sender, TextChangedEventArgs e)
         {
-            try
-            {
-                // Parse the values from the textboxes
-                decimal totalSales = decimal.Parse(TotalSalesTextBox.Text);
-                decimal discount = decimal.Parse(DiscountTextBox.Text);
-                decimal cashTendered = decimal.Parse(CashTenderedTextBox.Text);
+            // Initially set the values for Total and Cash Tendered
+            TotalTextBox.Text = closingSale.Total.ToString();
+            CashTenderedTextBox.Text = "0.00";
+            ChangeTextBox.Text = "0.00";
 
-                // Calculate the Grand Total
-                decimal grandTotal = totalSales - discount;
-                GrandTotalTextBox.Text = grandTotal.ToString("0.00");
+            // Get the entered discount
+            string enteredDiscount = DiscountTextBox.Text;
 
-                // Calculate the Change
-                decimal change = cashTendered - grandTotal;
-                ChangeTextBox.Text = change.ToString("0.00");
-            }
-            catch (FormatException)
+            // Validate the entered discount: Ensure it's a valid decimal or empty string
+            if (string.IsNullOrWhiteSpace(enteredDiscount) || Regex.IsMatch(enteredDiscount, @"[^0-9.]"))
             {
-                MessageBox.Show("Invalid input. Please ensure all fields contain numeric values.");
+                // If check fails, show a message
+                DiscountTextBox.Text = "";
+                return;
             }
-            catch (Exception ex)
+
+            // Attempt to convert entered discount to decimal
+            if (!decimal.TryParse(enteredDiscount, out var convertedValue))
             {
-                MessageBox.Show($"An error occurred: {ex.Message}"); 
+                // If conversion fails, show a message
+                MessageBox.Show("Invalid discount value.");
+                return;
             }
+
+            // Check if the entered discount is greater than the subtotal
+            if (convertedValue > closingSale.Subtotal)
+            {
+                MessageBox.Show("Total discount cannot be greater than subtotal.");
+                DiscountTextBox.Text = "";  // Clear the discount input
+                TotalTextBox.Text = closingSale.Total.ToString();  // Reset total
+                return;
+            }
+
+            // Calculate the new total after applying the discount
+            decimal newTotal = closingSale.Subtotal - convertedValue;
+            TotalTextBox.Text = newTotal.ToString();  // Set the new total
         }
 
         // Event handler for Enter button click, 
@@ -61,7 +68,27 @@ namespace Retail_PointOfSales
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
+        }
+        
+        private void CalculateChange(object sender, TextChangedEventArgs e)
+        {
+            decimal total = decimal.Parse(TotalTextBox.Text);
+            string cashTendered = CashTenderedTextBox.Text;
+            // Validate the entered discount: Ensure it's a valid decimal or empty string
+            if (string.IsNullOrWhiteSpace(cashTendered) || Regex.IsMatch(cashTendered, @"[^0-9.]"))
+            {
+                CashTenderedTextBox.Text = "";
+                return;  // Return early if invalid
+            }
+            // Attempt to convert entered discount to decimal
+            if (!decimal.TryParse(cashTendered, out var convertedValue))
+            {
+                // If conversion fails, show a message
+                MessageBox.Show("Invalid discount value.");
+                return;
+            }
+            ChangeTextBox.Text = (convertedValue - total).ToString();
         }
     }
 }
