@@ -164,7 +164,7 @@
                         VerticalAlignment="Center" HorizontalAlignment="Center">
                     <StackPanel>
                         <TextBox x:Name="SearchTextBox2"/>
-                        <Button Content="Search" Width="100" Margin="10,0,0,0" Click="SearchButton_Click"  />
+                        <Button Content="Search by product" Width="120" Margin="10,0,0,0" Click="SearchButton_Click"  />
                         <ListView x:Name="SearchPanel_ProductList" SelectionChanged="ProductSelected" BorderBrush="Aqua">
                             <ListView.View>
                                 <GridView>
