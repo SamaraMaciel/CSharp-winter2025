@@ -223,14 +223,26 @@ namespace Retail_PointOfSales
 
         private void CashPaymentButton_Click(object sender, RoutedEventArgs e)
         {
+            List<Product> products = new List<Product>();
+            
+            foreach (var item in ProductListView.Items)
+            {
+                if (item is Product product)
+                {
+                    products.Add(product);
+                }
+            }
+            
             Sale sale = new Sale
             {
-                Products = _products,
-                PaymentMethod = PaymentMethod.Cash,
-                SaleId = "keuhfudfh",
+                Products = products,
+                PaymentMethod = PaymentMethod.Cash.ToString(),
+                SaleId = Guid.NewGuid().ToString(),
                 Subtotal = decimal.Parse(TotalTextBlock.Text),
                 Total = decimal.Parse(TotalTextBlock.Text)
             };
+            
+            Console.WriteLine(sale.Products);
             
             CashPayment CashPaymentWindow = new CashPayment(sale);
 
@@ -247,18 +259,21 @@ namespace Retail_PointOfSales
             SalesReportWindow.ShowDialog();
         }
 
-        private void CreditPaymentButton_Clickutton_Click(object sender, RoutedEventArgs e)
+        private void CreditPaymentButton_Click(object sender, RoutedEventArgs e)
         {
-
-            CreditPayment CreditPaymentWindow = new CreditPayment();
+            Sale sale = new Sale
+            {
+                Products = _products,
+                PaymentMethod = PaymentMethod.CreditCard.ToString(),
+                SaleId = Guid.NewGuid().ToString(),
+                Subtotal = decimal.Parse(TotalTextBlock.Text),
+                Total = decimal.Parse(TotalTextBlock.Text)
+            };
+            
+            CreditPayment CreditPaymentWindow = new CreditPayment(sale);
 
             // Show the CreditPayment window
             CreditPaymentWindow.ShowDialog();
-        }
-
-        private void CreditPaymentButton_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
         }
     }
 }

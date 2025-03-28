@@ -1,6 +1,8 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using Newtonsoft.Json;
 
 namespace Retail_PointOfSales
 {
@@ -61,9 +63,26 @@ namespace Retail_PointOfSales
         // Event handler for Enter button click, 
         private void EnterButton_Click(object sender, RoutedEventArgs e)
         {
+            Sale sale = new Sale
+            {
+                SaleId = closingSale.SaleId,
+                Products = closingSale.Products,
+                PaymentMethod = closingSale.PaymentMethod,
+                Subtotal = closingSale.Subtotal,
+                Discount = decimal.Parse(DiscountTextBox.Text),
+                Total = decimal.Parse(TotalTextBox.Text),
+                CashTendered = decimal.Parse(CashTenderedTextBox.Text),
+                Change = decimal.Parse(ChangeTextBox.Text),
+                SaleDate = DateTime.Now
+            };
 
-            // Code to handle submission to JSON file
-            // Fetch the GrandTotal Textbox to record the cash transactions
+            using (StreamWriter file =
+                   File.CreateText(Path.Combine(AppContext.BaseDirectory, @"..\..\..\JSON\sales.json")))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, sale);
+            }
+            
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
