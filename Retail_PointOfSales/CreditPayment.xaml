@@ -25,6 +25,7 @@
                TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,10,0,20" 
                Grid.Column="0"  Grid.ColumnSpan="2"  Width="320"  />
 
+        <!-- Payment Labels and Values -->
         <!-- TOTAL SALES -->
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25">
             <TextBlock  Text="Total Sale ($)      :" FontWeight="Bold"  Margin="10,0,0,0" Foreground="#FF13E7F7" FontSize="15"/>
