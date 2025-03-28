@@ -10,6 +10,9 @@
     <Compile Update="CashPayment.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="CreditPayment.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="EndofDay.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -25,6 +28,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="CashPayment.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="CreditPayment.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="EndofDay.xaml">

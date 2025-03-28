@@ -156,6 +156,7 @@ namespace Retail_PointOfSales
         {
             Product productToAdd = new Product
             {
+                ProductId = product.ProductId,
                 ProductName = product.ProductName,
                 ProductPrice = product.ProductPrice,
                 Quantity = quantity,
@@ -202,6 +203,7 @@ namespace Retail_PointOfSales
         private void DeleteProduct(object sender, RoutedEventArgs e)
         {
             int productToRemove = ProductListView.SelectedIndex; // Get the selected product index
+            if (productToRemove.Equals(-1)) return; // Prevents exceptions when clicking delete button with no product selected
             ProductListView.Items.RemoveAt(productToRemove); // Remove the product from the list
             UpdateSaleTotal(); // Update the sale total
         }
@@ -217,12 +219,33 @@ namespace Retail_PointOfSales
                 total += item.Amount; // Sum the product prices
             }
             
-            TotalTextBlock.Text = $"{total:C}"; // Update the total display with the formatted value
+            TotalTextBlock.Text = total.ToString(); // Update the total display with the formatted value
         }
 
         private void CashPaymentButton_Click(object sender, RoutedEventArgs e)
         {
-            CashPayment CashPaymentWindow = new CashPayment();
+            List<Product> products = new List<Product>();
+            
+            foreach (var item in ProductListView.Items)
+            {
+                if (item is Product product)
+                {
+                    products.Add(product);
+                }
+            }
+            
+            Sale sale = new Sale
+            {
+                Products = products,
+                PaymentMethod = PaymentMethod.Cash.ToString(),
+                SaleId = Guid.NewGuid().ToString(),
+                Subtotal = decimal.Parse(TotalTextBlock.Text),
+                Total = decimal.Parse(TotalTextBlock.Text)
+            };
+            
+            Console.WriteLine(sale.Products);
+            
+            CashPayment CashPaymentWindow = new CashPayment(sale);
 
             // Show the CashPayment window
             CashPaymentWindow.ShowDialog();
@@ -235,6 +258,23 @@ namespace Retail_PointOfSales
 
             // Show the SalesReport window
             SalesReportWindow.ShowDialog();
+        }
+
+        private void CreditPaymentButton_Click(object sender, RoutedEventArgs e)
+        {
+            Sale sale = new Sale
+            {
+                Products = _products,
+                PaymentMethod = PaymentMethod.CreditCard.ToString(),
+                SaleId = Guid.NewGuid().ToString(),
+                Subtotal = decimal.Parse(TotalTextBlock.Text),
+                Total = decimal.Parse(TotalTextBlock.Text),
+            };
+            
+            CreditPayment CreditPaymentWindow = new CreditPayment(sale);
+
+            // Show the CreditPayment window
+            CreditPaymentWindow.ShowDialog();
         }
     }
 }

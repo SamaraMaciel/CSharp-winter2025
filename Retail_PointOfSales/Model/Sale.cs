@@ -2,10 +2,16 @@ namespace Retail_PointOfSales;
 
 public class Sale
 {
-    public int SaleId { get; set; }
+    public string SaleId { get; set; }
     public List<Product> Products { get; set; } = [];
-    public decimal Total { get; set; }
-    public PaymentMethod PaymentMethod { get; set; }
+    public string PaymentMethod { get; set; }
+    public string? CreditCardNumber { get; set; }
+    public decimal Subtotal { get; set; } // total rn
+    public decimal? Discount { get; set; }
+    public decimal Total { get; set; } // grand total
+    public decimal? CashTendered { get; set; }
+    public decimal? Change { get; set; }
+    public string SaleDate { get; set; }
 }
 
 public enum PaymentMethod 

@@ -29,29 +29,29 @@
 
         <!-- Payment Labels and Values -->
         <!-- TOTAL SALES -->
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Total Sale :" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF13E7F7" FontSize="15"/>
-        <TextBox Name="TotalSalesTextBox" Grid.Row="1" Grid.Column="1" Width="100" Height="30" Margin="20,0,0,0" Text="0.00" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" 
-                 Background="Black" Foreground="White" FontWeight="Bold" BorderThickness="0"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Subtotal ($):" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF13E7F7" FontSize="15"/>
+        <TextBox Name="SubtotalSalesTextBox" Grid.Row="1" Grid.Column="1" Width="100" Height="30" Margin="20,0,0,0" Text="0.00" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" 
+                 Background="Black" Foreground="White" FontWeight="Bold" BorderThickness="0" IsReadOnly="True"/>
 
         <!-- DISCOUNT -->
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Discount :" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF5D5F5F" FontSize="15"/>
-        <TextBox Name="DiscountTextBox" Grid.Row="2" Grid.Column="1" Width="100" Height="30" Margin="20,0,0,0" Text="0.00" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15"
-                 Foreground="#FF5D5F5F" FontWeight="Bold" BorderThickness="0" Background="Black"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Discount ($):" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF5D5F5F" FontSize="15"/>
+        <TextBox Name="DiscountTextBox" Grid.Row="2" Grid.Column="1" Width="100" Height="30" Margin="20,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15"
+                 Foreground="#FF5D5F5F" FontWeight="Bold" BorderThickness="0" Background="Black" TextChanged="CalculateTotal" />
 
         <!-- GRAND TOTAL -->
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="Grand Total :" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="Yellow" FontSize="15"/>
-        <TextBox Name="GrandTotalTextBox" Grid.Row="3" Grid.Column="1" Width="100" Height="30" Margin="20,0,0,0" Text="0.00" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15"
-                 Foreground="#FFF0A61C" FontWeight="Bold" BorderThickness="0" Background="Black"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Total ($):" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="Yellow" FontSize="15"/>
+        <TextBox Name="TotalTextBox" Grid.Row="3" Grid.Column="1" Width="100" Height="30" Margin="20,0,0,0" Text="0.00" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15"
+                 Foreground="#FFF0A61C" FontWeight="Bold" BorderThickness="0" Background="Black" IsReadOnly="True"/>
 
         <!-- CASH TENDERERED -->
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="Cash Tendered :" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF13E7F7" FontSize="15"/>
-        <TextBox Name="CashTenderedTextBox"  Grid.Row="4" Grid.Column="1" Width="100" Height="30" Margin="20,0,0,0" Text="0.00" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15"
-                 Foreground="White" FontWeight="Bold" BorderThickness="0" Background="Black"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Cash Tendered ($):" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF13E7F7" FontSize="15"/>
+        <TextBox Name="CashTenderedTextBox"  Grid.Row="4" Grid.Column="1" Width="100" Height="30" Margin="20,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15"
+                 Foreground="White" FontWeight="Bold" BorderThickness="0" Background="Black" TextChanged="CalculateChange"/>
 
         <!-- CHANGE -->
-        <TextBlock Grid.Row="5" Grid.Column="0" Text="Change :" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF13E7F7" FontSize="15"/>
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Change ($):" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF13E7F7" FontSize="15"/>
         <TextBox Name="ChangeTextBox" Grid.Row="5" Grid.Column="1" Width="100" Height="30" Margin="20,0,0,0" Text="0.00" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" 
-                 Foreground="Yellow" FontWeight="Bold" BorderThickness="0" Background="Black"/>
+                 Foreground="Yellow" FontWeight="Bold" BorderThickness="0" Background="Black" IsReadOnly="True"/>
 
         <!-- Buttons -->
         <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0" Grid.Column="1" Height="50" Width="220">
