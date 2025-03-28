@@ -11,7 +11,7 @@ public class Sale
     public decimal Total { get; set; } // grand total
     public decimal? CashTendered { get; set; }
     public decimal? Change { get; set; }
-    public DateTime SaleDate { get; set; }
+    public string SaleDate { get; set; }
 }
 
 public enum PaymentMethod 

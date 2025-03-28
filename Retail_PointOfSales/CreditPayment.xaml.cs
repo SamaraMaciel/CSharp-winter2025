@@ -19,7 +19,7 @@ namespace Retail_PointOfSales
     /// </summary>
     public partial class CreditPayment : Window
     {
-        public CreditPayment()
+        public CreditPayment(Sale sale)
         {
             InitializeComponent();
         }

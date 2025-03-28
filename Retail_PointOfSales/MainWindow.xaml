@@ -49,6 +49,7 @@
             <ListView x:Name="ProductListView" Height="auto" Grid.Column="0" Grid.Row="0" Margin="0,0,15,0" BorderBrush="Aqua">
                 <ListView.View >
                     <GridView>
+                        <GridViewColumn Header="Id" DisplayMemberBinding="{Binding ProductId}" Width="30"/>
                         <GridViewColumn Header="Product name" DisplayMemberBinding="{Binding ProductName}" Width="350"/>
                         <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Quantity}" Width="100"/>
                         <GridViewColumn Header="Price" DisplayMemberBinding="{Binding ProductPrice, StringFormat=C}" Width="100"/>

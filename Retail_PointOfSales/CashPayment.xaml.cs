@@ -1,8 +1,7 @@
-﻿using System.IO;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using Newtonsoft.Json;
+using Retail_PointOfSales.Model;
 
 namespace Retail_PointOfSales
 {
@@ -73,17 +72,14 @@ namespace Retail_PointOfSales
                 Total = decimal.Parse(TotalTextBox.Text),
                 CashTendered = decimal.Parse(CashTenderedTextBox.Text),
                 Change = decimal.Parse(ChangeTextBox.Text),
-                SaleDate = DateTime.Now
+                SaleDate = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")
             };
-
-            using (StreamWriter file =
-                   File.CreateText(Path.Combine(AppContext.BaseDirectory, @"..\..\..\JSON\sales.json")))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, sale);
-            }
             
+            SaleManager saleManager = new SaleManager();
+            saleManager.SaveSale(sale);
+            Close();
         }
+
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {

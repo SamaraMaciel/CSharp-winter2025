@@ -156,6 +156,7 @@ namespace Retail_PointOfSales
         {
             Product productToAdd = new Product
             {
+                ProductId = product.ProductId,
                 ProductName = product.ProductName,
                 ProductPrice = product.ProductPrice,
                 Quantity = quantity,
@@ -267,7 +268,7 @@ namespace Retail_PointOfSales
                 PaymentMethod = PaymentMethod.CreditCard.ToString(),
                 SaleId = Guid.NewGuid().ToString(),
                 Subtotal = decimal.Parse(TotalTextBlock.Text),
-                Total = decimal.Parse(TotalTextBlock.Text)
+                Total = decimal.Parse(TotalTextBlock.Text),
             };
             
             CreditPayment CreditPaymentWindow = new CreditPayment(sale);
