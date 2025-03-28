@@ -19,6 +19,7 @@
     <None Remove="10C.png" />
     <None Remove="25C.png" />
     <None Remove="5C.png" />
+    <None Remove="Images\shop.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,6 +48,9 @@
     <None Remove="Images\25C.png" />
     <Resource Include="Images\25C.png" />
     <None Remove="JSON\user.json" />
+    <Resource Include="Images\shop.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="JSON\user.json" />
     <None Remove="Images\addQty.png" />
     <Resource Include="Images\addQty.png" />

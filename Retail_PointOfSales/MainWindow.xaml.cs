@@ -276,5 +276,20 @@ namespace Retail_PointOfSales
             // Show the CreditPayment window
             CreditPaymentWindow.ShowDialog();
         }
+
+        // Exits the application in WPF
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to exit?", "Exit Confirmation",
+            MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                Application.Current.Shutdown(); 
+            }
+
+
+
+        }
     }
 }
