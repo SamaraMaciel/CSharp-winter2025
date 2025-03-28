@@ -5,11 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Retail_PointOfSales"
         mc:Ignorable="d"
-        Title="CreditPayment" Height="300" Width="400">
-    <Grid Margin="10"  Background="Black">
+        Title="CreditPayment" Height="300" Width="350" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Margin="10"  Background="#FF201919">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -17,7 +16,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -27,32 +25,38 @@
                TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,10,0,20" 
                Grid.Column="0"  Grid.ColumnSpan="2"  Width="320"  />
 
-        <!-- Payment Labels and Values -->
         <!-- TOTAL SALES -->
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Total Sale :" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF13E7F7" FontSize="15"/>
-        <TextBox Name="TotalSalesTextBox" Grid.Row="1" Grid.Column="1" Width="100" Height="30" Margin="20,0,0,0" Text="0.00" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" 
-             Background="Black" Foreground="White" FontWeight="Bold" BorderThickness="0"/>
-
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25">
+            <TextBlock  Text="Total Sale ($)      :" FontWeight="Bold"  Margin="10,0,0,0" Foreground="#FF13E7F7" FontSize="15"/>
+            <TextBox Name="TotalSalesTextBox"  Width="100" Margin="20,0,0,0" Text="0.00"  HorizontalAlignment="Left" FontSize="15" 
+                 Background="#FF201919" Foreground="White" FontWeight="Bold" BorderThickness="0" IsReadOnly="True"/>
+        </StackPanel>
+        
         <!-- DISCOUNT -->
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Discount :" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF5D5F5F" FontSize="15"/>
-        <TextBox Name="DiscountTextBox" Grid.Row="2" Grid.Column="1" Width="100" Height="30" Margin="20,0,0,0" Text="0.00" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15"
-             Foreground="#FF5D5F5F" FontWeight="Bold" BorderThickness="0" Background="Black"/>
-
+        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25">
+            <TextBlock  Text="Discount ($)       :" FontWeight="Bold"  Margin="10,0,0,0" Foreground="#FF515858" FontSize="15"/>
+            <TextBox Name="DiscountTextBox"  Width="100" Height="30" Margin="20,0,0,0" Text="0.00"  HorizontalAlignment="Left" FontSize="15"
+                 Foreground="#FF515858" FontWeight="Bold" BorderThickness="0" Background="#FF201919"/>
+        </StackPanel>
+        
         <!-- GRAND TOTAL -->
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="Grand Total :" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="Yellow" FontSize="15"/>
-        <TextBox Name="GrandTotalTextBox" Grid.Row="3" Grid.Column="1" Width="100" Height="30" Margin="20,0,0,0" Text="0.00" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15"
-             Foreground="#FFF0A61C" FontWeight="Bold" BorderThickness="0" Background="Black"/>
-
+        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25">
+            <TextBlock  Text="Grand Total ($)   :" FontWeight="Bold"  Margin="10,0,0,0" Foreground="Yellow" FontSize="15"/>
+            <TextBox Name="GrandTotalTextBox"  Width="100" Height="30" Margin="20,0,0,0" Text="0.00"  HorizontalAlignment="Left" FontSize="15"
+                 Foreground="#FFF0A61C" FontWeight="Bold" BorderThickness="0" Background="#FF201919" IsReadOnly="True"/>
+        </StackPanel>
 
         <!-- CREDIT NO -->
-        <TextBlock Grid.Row="5" Grid.Column="0" Text="Credit No. :" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF13E7F7" FontSize="15"/>
-        <TextBox Name="ChangeTextBox" Grid.Row="5" Grid.Column="1" Width="100" Height="30" Margin="20,0,0,0" Text="xxx xxxx xxxx" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" 
-             Foreground="Yellow" FontWeight="Bold" BorderThickness="0" Background="Black"/>
+        <StackPanel Grid.Row="4" Grid.Column="0"  Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25">
+            <TextBlock Text="Credit No.           :" FontWeight="Bold"  Margin="10,0,0,0" Foreground="#FF13E7F7" FontSize="15"/>
+            <TextBox Name="CreditCardNoTextBox"  Width="170" Height="30" Margin="20,0,0,0" Text="xxx xxxx xxxx"  HorizontalAlignment="Left" FontSize="15" 
+                 Foreground="Yellow" FontWeight="Bold" BorderThickness="0" Background="#FF201919"/>
+        </StackPanel>
 
         <!-- Buttons -->
-        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0" Grid.Column="1" Height="50" Width="220">
-            <Button Content="Enter" Width="80" Height="30" Margin="5,5,5,0" Background="Green" Foreground="White" VerticalAlignment="Center" Click="EnterButton_Click"/>
-            <Button Content="Cancel" Width="80" Height="30" Margin="5,5,5,0" Background="Red" Foreground="White" VerticalAlignment="Center" Click="CancelButton_Click"/>
+        <StackPanel Grid.Row="5"  Grid.Column="0"  Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="35,30,0,0"  Height="50" Width="190">
+            <Button Content="Enter" Width="80" Height="30"  Background="Green" Foreground="White"  Click="EnterButton_Click"/>
+            <Button Content="Cancel" Width="80" Height="30" Margin="5" Background="Red" Foreground="White"  Click="CancelButton_Click"/>
         </StackPanel>
     </Grid>
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Retail_PointOfSales"
         mc:Ignorable="d"
-        Title="Opening Fund" Height="500" Width="650" Background="SlateGray" Foreground="AntiqueWhite">
+        Title="Opening Fund" Height="500" Width="650" Background="SlateGray" Foreground="AntiqueWhite" ResizeMode="NoResize">
     <Grid Background="#FF161314">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

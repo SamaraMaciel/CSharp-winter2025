@@ -58,8 +58,8 @@
         <Grid Grid.Row="3" Grid.Column="1">
             <!-- Search Panel (Hidden Initially) -->
             <Border x:Name="SearchPanel" Background="White" Visibility="Collapsed"
-         BorderBrush="Black" BorderThickness="2" Padding="10"
-         VerticalAlignment="Center" HorizontalAlignment="Center">
+                    BorderBrush="Black" BorderThickness="2" Padding="10"
+                    VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel>
                     <TextBox x:Name="SearchTextBox2"/>
                     <Button Content="Search by product" Width="120" Margin="10,0,0,0" Click="SearchButton_Click"  />
@@ -191,7 +191,7 @@
                 </StackPanel>
             </Button>
 
-            <Border Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Background="Yellow" Width="230" Height="5" Margin="10,10,0,0" 
+            <Border Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Background="#FFEBEB0F" Width="230" Height="5" Margin="10,10,0,0" 
                     VerticalAlignment="Center" HorizontalAlignment="Left" />
 
             <!-- Sales Report Button -->
