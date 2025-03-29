@@ -5,11 +5,16 @@ namespace Retail_PointOfSales.Model;
 
 public class SaleManager
 {
-    public void SaveSale(Sale sale)
+    string filePath = Path.Combine(AppContext.BaseDirectory, @"..\..\..\JSON\sales.json");
+    List<Sale> sales = [];
+
+    public SaleManager()
     {
-        string filePath = Path.Combine(AppContext.BaseDirectory, @"..\..\..\JSON\sales.json");
-        
-        List<Sale> sales = new List<Sale>();
+        LoadSales();
+    }
+    
+    public void LoadSales()
+    {
         if (File.Exists(filePath))
         {
             using StreamReader fileToRead = new StreamReader(filePath);
@@ -19,11 +24,21 @@ public class SaleManager
                 sales = JsonConvert.DeserializeObject<List<Sale>>(json) ?? [];
             }
         }
-        
+    }
+    
+    public void SaveSale(Sale sale)
+    {
         sales.Add(sale);
 
         using StreamWriter fileToWrite = new StreamWriter(filePath);
         JsonSerializer serializer = new JsonSerializer();
         serializer.Serialize(fileToWrite, sales);
+    }
+
+    public List<Sale> FilterSales(string startDate, string endDate)
+    {
+        List<Sale> filteredSales = sales.FindAll(sale => sale.SaleDate.StartsWith(startDate) || sale.SaleDate.StartsWith(endDate));
+        Console.WriteLine(filteredSales.Count);
+        return filteredSales;
     }
 }
