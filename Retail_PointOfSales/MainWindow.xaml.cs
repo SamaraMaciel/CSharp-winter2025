@@ -243,8 +243,6 @@ namespace Retail_PointOfSales
                 Total = decimal.Parse(TotalTextBlock.Text)
             };
             
-            Console.WriteLine(sale.Products);
-            
             CashPayment CashPaymentWindow = new CashPayment(sale);
 
             // Show the CashPayment window
@@ -262,9 +260,19 @@ namespace Retail_PointOfSales
 
         private void CreditPaymentButton_Click(object sender, RoutedEventArgs e)
         {
+            List<Product> products = new List<Product>();
+            
+            foreach (var item in ProductListView.Items)
+            {
+                if (item is Product product)
+                {
+                    products.Add(product);
+                }
+            }
+            
             Sale sale = new Sale
             {
-                Products = _products,
+                Products = products,
                 PaymentMethod = PaymentMethod.CreditCard.ToString(),
                 SaleId = Guid.NewGuid().ToString(),
                 Subtotal = decimal.Parse(TotalTextBlock.Text),
@@ -287,9 +295,6 @@ namespace Retail_PointOfSales
             {
                 Application.Current.Shutdown(); 
             }
-
-
-
         }
     }
 }
