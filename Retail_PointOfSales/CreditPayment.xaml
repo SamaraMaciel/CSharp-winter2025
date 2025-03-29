@@ -28,29 +28,29 @@
         <!-- Payment Labels and Values -->
         <!-- TOTAL SALES -->
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25">
-            <TextBlock  Text="Total Sale ($)      :" FontWeight="Bold"  Margin="10,0,0,0" Foreground="#FF13E7F7" FontSize="15"/>
-            <TextBox Name="TotalSalesTextBox"  Width="100" Margin="20,0,0,0" Text="0.00"  HorizontalAlignment="Left" FontSize="15" 
+            <TextBlock  Text="Subtotal ($)      :" FontWeight="Bold"  Margin="10,0,0,0" Foreground="#FF13E7F7" FontSize="15"/>
+            <TextBox Name="SubtotalTextBox"  Width="100" Margin="20,0,0,0" Text="0.00"  HorizontalAlignment="Left" FontSize="15" 
                  Background="#FF201919" Foreground="White" FontWeight="Bold" BorderThickness="0" IsReadOnly="True"/>
         </StackPanel>
         
         <!-- DISCOUNT -->
         <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25">
             <TextBlock  Text="Discount ($)       :" FontWeight="Bold"  Margin="10,0,0,0" Foreground="#FF515858" FontSize="15"/>
-            <TextBox Name="DiscountTextBox"  Width="100" Height="30" Margin="20,0,0,0" Text="0.00"  HorizontalAlignment="Left" FontSize="15"
-                 Foreground="#FF515858" FontWeight="Bold" BorderThickness="0" Background="#FF201919"/>
+            <TextBox Name="DiscountTextBox"  Width="100" Height="30" Margin="20,0,0,0" HorizontalAlignment="Left" FontSize="15"
+                 Foreground="#FF515858" FontWeight="Bold" BorderThickness="0" Background="#FF201919" TextChanged="CalculateTotal"/>
         </StackPanel>
         
         <!-- GRAND TOTAL -->
         <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25">
-            <TextBlock  Text="Grand Total ($)   :" FontWeight="Bold"  Margin="10,0,0,0" Foreground="Yellow" FontSize="15"/>
-            <TextBox Name="GrandTotalTextBox"  Width="100" Height="30" Margin="20,0,0,0" Text="0.00"  HorizontalAlignment="Left" FontSize="15"
+            <TextBlock  Text="Total ($)   :" FontWeight="Bold"  Margin="10,0,0,0" Foreground="Yellow" FontSize="15"/>
+            <TextBox Name="TotalTextBox"  Width="100" Height="30" Margin="20,0,0,0"  HorizontalAlignment="Left" FontSize="15"
                  Foreground="#FFF0A61C" FontWeight="Bold" BorderThickness="0" Background="#FF201919" IsReadOnly="True"/>
         </StackPanel>
 
         <!-- CREDIT NO -->
         <StackPanel Grid.Row="4" Grid.Column="0"  Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25">
             <TextBlock Text="Credit No.           :" FontWeight="Bold"  Margin="10,0,0,0" Foreground="#FF13E7F7" FontSize="15"/>
-            <TextBox Name="CreditCardNoTextBox"  Width="170" Height="30" Margin="20,0,0,0" Text="xxx xxxx xxxx"  HorizontalAlignment="Left" FontSize="15" 
+            <TextBox Name="CreditCardNoTextBox"  Width="170" Height="30" Margin="20,0,0,0" Text="xxxx xxxx xxxx"  HorizontalAlignment="Left" FontSize="15" 
                  Foreground="Yellow" FontWeight="Bold" BorderThickness="0" Background="#FF201919"/>
         </StackPanel>
 
@@ -60,5 +60,4 @@
             <Button Content="Cancel" Width="80" Height="30" Margin="5" Background="Red" Foreground="White"  Click="CancelButton_Click"/>
         </StackPanel>
     </Grid>
-
 </Window>

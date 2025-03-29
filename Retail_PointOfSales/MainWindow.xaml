@@ -60,20 +60,24 @@
             <Border x:Name="SearchPanel" Background="White" Visibility="Collapsed"
                     BorderBrush="Black" BorderThickness="2" Padding="10"
                     VerticalAlignment="Center" HorizontalAlignment="Center">
-                <StackPanel>
-                    <TextBox x:Name="SearchTextBox2"/>
-                    <Button Content="Search by product" Width="120" Margin="10,0,0,0" Click="SearchButton_Click"  />
-                    <ListView x:Name="SearchPanel_ProductList" SelectionChanged="ProductSelected" BorderBrush="Aqua">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding ProductId}" Width="100"></GridViewColumn>
-                                <GridViewColumn Header="Product Name" DisplayMemberBinding="{Binding ProductName, StringFormat=C}" Width="150" />
-                                <GridViewColumn Header="Price" DisplayMemberBinding="{Binding ProductPrice, StringFormat=C}" Width="100"></GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                    <Button Content="Close" Click="CloseSearchPanel"/>
-                </StackPanel>
+                <!-- ScrollViewr element set to "Auto" adds a scrollbar in the Search Panel when the view is smaller than the panel vertical size -->
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBox x:Name="SearchTextBox2"/>
+                        <Button Content="Search by product" Width="120" Margin="10,0,0,0" Click="SearchButton_Click"  />
+                        <ListView x:Name="SearchPanel_ProductList" SelectionChanged="ProductSelected" BorderBrush="Aqua">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding ProductId}" Width="100"></GridViewColumn>
+                                    <GridViewColumn Header="Product Name" DisplayMemberBinding="{Binding ProductName, StringFormat=C}" Width="150" />
+                                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding ProductPrice, StringFormat=C}" Width="100"></GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Button Content="Close" Click="CloseSearchPanel"/>
+                    </StackPanel>
+                </ScrollViewer>
+                
             </Border>
 
             <!-- Quantity Panel (Hidden Initially) -->
@@ -134,7 +138,7 @@
 
             <!-- Void Order Button -->
             <Button Grid.Row="0" Grid.Column="1" Width="110" Height="80" Margin="0,0,10,0"  Background="Red" Foreground="AntiqueWhite" 
-              Grid.ColumnSpan="2" BorderBrush="Aqua" >
+              Click="VoidOrder_Click" Grid.ColumnSpan="2" BorderBrush="Aqua" >
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                     <!-- Image -->
                     <Image Source="Images/remove.png" Width="20" Height="20" Margin="5,10,5,5"/>

@@ -79,8 +79,7 @@ namespace Retail_PointOfSales
             saleManager.SaveSale(sale);
             Close();
         }
-
-
+        
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             Close();

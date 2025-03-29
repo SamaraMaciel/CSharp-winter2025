@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using Retail_PointOfSales.Model;
 
 namespace Retail_PointOfSales
 {
@@ -26,7 +15,16 @@ namespace Retail_PointOfSales
 
         private void GenerateReportButton_Click(object sender, RoutedEventArgs e)
         {
-            // For configuration
+            string startDate = StartDatePicker.Text;
+            string endDate = EndDatePicker.Text;
+            
+            if (string.IsNullOrWhiteSpace(EndDatePicker.Text))
+            {
+                endDate = DateTime.Now.ToString("yyyy-MM-dd");
+            }
+            
+            SaleManager saleManager = new SaleManager();
+            saleManager.FilterSales(startDate, endDate);
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)

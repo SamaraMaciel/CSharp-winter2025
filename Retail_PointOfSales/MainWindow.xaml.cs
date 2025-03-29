@@ -41,11 +41,16 @@ namespace Retail_PointOfSales
         {
             actualDate = DateTime.Now;
             // Updating the Date and Time in the UI - Putting it in the Dispatcher thread that runs in the UI
-            Application.Current.Dispatcher.Invoke(() =>
+
+            if (Application.Current != null && DateTextBox != null && TimeTextBox != null) // This line prevents NullReferenceExeption when the window is closed
             {
-                DateTextBox.Text = actualDate.ToString("MM/dd/yyyy");
-                TimeTextBox.Text = actualDate.ToString("HH:mm:ss");
-            });
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    DateTextBox.Text = actualDate.ToString("MM/dd/yyyy");
+                    TimeTextBox.Text = actualDate.ToString("HH:mm:ss");
+                });
+            }
+                
         }
 
         /// <summary>
@@ -86,6 +91,7 @@ namespace Retail_PointOfSales
         /// </summary>
         private void OpenSearchPanel(object sender, RoutedEventArgs e)
         {
+            SearchTextBox2.Text = ""; //Clears the text on search box if any
             SearchPanel.Visibility = Visibility.Visible;
             SearchPanel_ProductList.ItemsSource = productManager.LoadAllProducts(); // Load Products
         }
@@ -202,10 +208,24 @@ namespace Retail_PointOfSales
         /// </summary>
         private void DeleteProduct(object sender, RoutedEventArgs e)
         {
-            int productToRemove = ProductListView.SelectedIndex; // Get the selected product index
-            if (productToRemove.Equals(-1)) return; // Prevents exceptions when clicking delete button with no product selected
-            ProductListView.Items.RemoveAt(productToRemove); // Remove the product from the list
-            UpdateSaleTotal(); // Update the sale total
+            //Console.WriteLine(ProductListView);
+            if (ProductListView.Items.Count == 0)
+            {
+                MessageBox.Show("No products to delete!");
+                return;
+            }
+            else if (ProductListView.SelectedIndex.Equals(-1))
+            {
+                MessageBox.Show("Please select a product to delete.");
+                return;
+            }
+            else
+            {
+                int productToRemove = ProductListView.SelectedIndex; // Get the selected product index
+                if (productToRemove.Equals(-1)) return; // Prevents exceptions when clicking delete button with no product selected
+                ProductListView.Items.RemoveAt(productToRemove); // Remove the product from the list
+                UpdateSaleTotal(); // Update the sale total
+            }
         }
 
         /// <summary>
@@ -219,7 +239,7 @@ namespace Retail_PointOfSales
                 total += item.Amount; // Sum the product prices
             }
             
-            TotalTextBlock.Text = total.ToString(); // Update the total display with the formatted value
+            TotalTextBlock.Text = total.ToString("0.00"); // Update the total display with the formatted value
         }
 
         private void CashPaymentButton_Click(object sender, RoutedEventArgs e)
@@ -243,8 +263,6 @@ namespace Retail_PointOfSales
                 Total = decimal.Parse(TotalTextBlock.Text)
             };
             
-            Console.WriteLine(sale.Products);
-            
             CashPayment CashPaymentWindow = new CashPayment(sale);
 
             // Show the CashPayment window
@@ -262,9 +280,19 @@ namespace Retail_PointOfSales
 
         private void CreditPaymentButton_Click(object sender, RoutedEventArgs e)
         {
+            List<Product> products = new List<Product>();
+            
+            foreach (var item in ProductListView.Items)
+            {
+                if (item is Product product)
+                {
+                    products.Add(product);
+                }
+            }
+            
             Sale sale = new Sale
             {
-                Products = _products,
+                Products = products,
                 PaymentMethod = PaymentMethod.CreditCard.ToString(),
                 SaleId = Guid.NewGuid().ToString(),
                 Subtotal = decimal.Parse(TotalTextBlock.Text),
@@ -287,9 +315,34 @@ namespace Retail_PointOfSales
             {
                 Application.Current.Shutdown(); 
             }
-
-
-
         }
+
+        /// <summary>
+        /// Clears all the products in the cart and updates the value of sale total.
+        /// </summary>
+        private void VoidOrder_Click(object sender, RoutedEventArgs e)
+        {
+            // Checksif the cart is empty
+            if (ProductListView.Items.Count == 0)
+            {
+                // Show a warning message if the cart is empty
+                MessageBox.Show("The order is empty!", "Warning");
+            }
+            else
+            {
+                //Validate if the user really wants to void the order
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to void the order?", "Void order", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.No)
+                {
+                    return;
+                }
+                else
+                {
+                    ProductListView.Items.Clear(); // Clear the product list
+                    UpdateSaleTotal(); // Update the sale total
+                }
+            }
+        }
+
     }
 }

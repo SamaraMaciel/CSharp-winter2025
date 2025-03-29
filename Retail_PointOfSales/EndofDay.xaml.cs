@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Retail_PointOfSales.Model;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Retail_PointOfSales
 {
@@ -19,9 +9,14 @@ namespace Retail_PointOfSales
     /// </summary>
     public partial class EndofDay : Window
     {
+        private List<Sale> sales; // work in progress - SM
+        SaleManager salesManager = new(); // work in progress - SM
+
         public EndofDay()
         {
             InitializeComponent();
+            //initialize the CalculateCashSales method when loading this window
+            CalculateCashSales();
         }
 
         // Automatically calculate and display the sum value in the Total_TextBox
@@ -91,5 +86,25 @@ namespace Retail_PointOfSales
         {
             this.Close();
         }
+
+        //Method to calculate the cash sales for the day - data retrieving from sales.json file
+        private void CalculateCashSales()
+        {
+            // Get the sales data from the JSON file
+            var sales = salesManager.LoadAllSales();
+
+            //Filters the sales data based on sales payed with cash and the sale date is today
+            IEnumerable<Sale> cashSales = sales.Where(s => s.PaymentMethod == "Cash" && DateTime.TryParse(s.SaleDate, out DateTime saleDate) && saleDate.Date == DateTime.Now.Date);
+
+            // Retrieve the Total data from the filtered cashSales
+            var totalValues = cashSales.Select(s => s.Total).ToList();
+
+            // Calculate the total cash sales
+            decimal sumTotalValues = (decimal)totalValues.Sum();
+            //Console.WriteLine(sumTotalValues); //This line is to test the sumTotalValues on console
+            // Display the total cash sales
+            TotalCashSales.Text = sumTotalValues.ToString("C");
+        }
+
     }
 }
