@@ -113,7 +113,7 @@
             <!-- Variance -->
             <StackPanel Orientation="Horizontal" Margin="0,5">
                 <TextBlock Text="Variance:" Width="150" VerticalAlignment="Center" FontSize="15"/>
-                <TextBox Text="$0.00" HorizontalAlignment="Left" FontWeight="UltraBold" FontSize="15" BorderThickness="0" Background="Transparent" Foreground="LightGoldenrodYellow" />
+                <TextBox Name="Variance"  Text="$0.00" HorizontalAlignment="Left" FontWeight="UltraBold" FontSize="15" BorderThickness="0" Background="Transparent" Foreground="LightGoldenrodYellow" />
             </StackPanel>
 
             <!-- Credit Card Transactions -->

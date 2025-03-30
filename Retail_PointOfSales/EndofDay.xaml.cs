@@ -1,4 +1,5 @@
 ﻿using Retail_PointOfSales.Model;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -11,12 +12,15 @@ namespace Retail_PointOfSales
     {
         private List<Sale> sales; // work in progress - SM
         SaleManager salesManager = new(); // work in progress - SM
+        
 
         public EndofDay()
         {
             InitializeComponent();
             //initialize the CalculateCashSales method when loading this window
             CalculateCashSales();
+            EndOfDayVariance(); //initialize the EndOfDayVariance method when loading the window
+            //TextBox_TextChanged();
         }
 
         // Automatically calculate and display the sum value in the Total_TextBox
@@ -105,6 +109,32 @@ namespace Retail_PointOfSales
             // Display the total cash sales
             TotalCashSales.Text = sumTotalValues.ToString("C");
         }
+
+        //TotalTextBlock.TextChanged += EndOfDayVariance(); // Event handler for the EndOfDayVariance method
+        // Mtethod to calculate the variance between the cash sales and the cash counted (total cash count)
+        private void EndOfDayVariance() //work in prgress - SM needs to catch the value of TotalTextBlock every time it changes
+        {
+            var endOfDayTotalCash = TotalTextBlock.Text;
+            var edOfDayCashSales = TotalCashSales.Text;
+            var variance = ToDecimal(edOfDayCashSales) - ToDecimal(endOfDayTotalCash);
+            //var variance = decimal.ParseString(edOfDayCashSales) - decimal.ParseString(endOfDayTotalCash);
+            Variance.Text = variance.ToString("C");
+        }
+
+        // Convert string to decimal
+        private static decimal ToDecimal(string value)
+        {
+            Console.WriteLine(decimal.Parse(value, System.Globalization.NumberStyles.Currency)); 
+            return decimal.Parse(value, System.Globalization.NumberStyles.Currency);
+            
+        }
+
+        //Fix it later - colect the data from the TotalTextBlock every time it changes
+        // is possibility to add TextChanged="EndOfDayVariance" to the TotalTextBlock in the xmal file
+        //private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    EndOfDayVariance(sender, e);
+        //}
 
     }
 }
