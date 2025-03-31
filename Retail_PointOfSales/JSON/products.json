@@ -98,5 +98,95 @@
     "productId": 20,
     "productName": "Garlic",
     "productPrice": 0.99
+  },
+  {
+    "productId": 21,
+    "productName": "Lettuce",
+    "productPrice": 1.59
+  },
+  {
+    "productId": 22,
+    "productName": "Strawberries",
+    "productPrice": 2.99
+  },
+  {
+    "productId": 23,
+    "productName": "Chicken Thighs",
+    "productPrice": 3.49
+  },
+  {
+    "productId": 24,
+    "productName": "Ground Beef",
+    "productPrice": 5.69
+  },
+  {
+    "productId": 25,
+    "productName": "Pineapple",
+    "productPrice": 3.29
+  },
+  {
+    "productId": 26,
+    "productName": "Zucchini",
+    "productPrice": 1.59
+  },
+  {
+    "productId": 27,
+    "productName": "Peppers",
+    "productPrice": 2.49
+  },
+  {
+    "productId": 28,
+    "productName": "Onion",
+    "productPrice": 1.19
+  },
+  {
+    "productId": 29,
+    "productName": "Avocado",
+    "productPrice": 2.99
+  },
+  {
+    "productId": 30,
+    "productName": "Coconut Milk",
+    "productPrice": 2.79
+  },
+  {
+    "productId": 31,
+    "productName": "Canned Tuna",
+    "productPrice": 1.49
+  },
+  {
+    "productId": 32,
+    "productName": "Mushrooms",
+    "productPrice": 1.99
+  },
+  {
+    "productId": 33,
+    "productName": "Cranberries",
+    "productPrice": 3.59
+  },
+  {
+    "productId": 34,
+    "productName": "Peach",
+    "productPrice": 1.99
+  },
+  {
+    "productId": 35,
+    "productName": "Cherries",
+    "productPrice": 4.99
+  },
+  {
+    "productId": 36,
+    "productName": "Raspberries",
+    "productPrice": 4.49
+  },
+  {
+    "productId": 37,
+    "productName": "Grapes",
+    "productPrice": 3.99
+  },
+  {
+    "productId": 38,
+    "productName": "Watermelon",
+    "productPrice": 5.99
   }
 ]
