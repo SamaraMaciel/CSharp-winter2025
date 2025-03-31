@@ -12,14 +12,17 @@ namespace Retail_PointOfSales
     {
         private List<Sale> sales; // work in progress - SM
         SaleManager salesManager = new(); // work in progress - SM
-        
+        //public decimal total { get; set; } //Making the total a property to be used in the EndOfDayVariance method
+
 
         public EndofDay()
         {
             InitializeComponent();
             //initialize the CalculateCashSales method when loading this window
             CalculateCashSales();
-            EndOfDayVariance(); //initialize the EndOfDayVariance method when loading the window
+            CalculateCreditSales();
+            TotalSales();
+            //EndOfDayVariance(); //initialize the EndOfDayVariance method when loading the window
             //TextBox_TextChanged();
         }
 
@@ -60,7 +63,7 @@ namespace Retail_PointOfSales
                 int fiftyDollar = string.IsNullOrWhiteSpace(FiftyDollarTextBox.Text) ? 0 : int.Parse(FiftyDollarTextBox.Text);
                 int hundredDollar = string.IsNullOrWhiteSpace(HundredDollarTextBox.Text) ? 0 : int.Parse(HundredDollarTextBox.Text);
 
-                // Calculate total using integer values
+                // Calculate total using integer values -- This variable was changed to a public property
                 decimal total = (fiveCents * 0.05m) + (tenCents * 0.10m) + (twentyFiveCents * 0.25m) +
                                  oneDollar + (twoDollar * 2) +
                                  (fiveDollar * 5) + (tenDollar * 10) +
@@ -69,6 +72,8 @@ namespace Retail_PointOfSales
 
                 // Display the total
                 TotalTextBlock.Text = total.ToString("C");
+                EndOfDayAuxiliaryTotalCash();
+                EndOfDayVariance();
             }
             catch (Exception)
             {
@@ -114,11 +119,33 @@ namespace Retail_PointOfSales
         // Mtethod to calculate the variance between the cash sales and the cash counted (total cash count)
         private void EndOfDayVariance() //work in prgress - SM needs to catch the value of TotalTextBlock every time it changes
         {
-            var endOfDayTotalCash = TotalTextBlock.Text;
+            var endOfDayTotalCash = EndOfDayAuxiliaryTotalCash();
             var edOfDayCashSales = TotalCashSales.Text;
-            var variance = ToDecimal(edOfDayCashSales) - ToDecimal(endOfDayTotalCash);
-            //var variance = decimal.ParseString(edOfDayCashSales) - decimal.ParseString(endOfDayTotalCash);
+            var variance = ToDecimal(edOfDayCashSales) - endOfDayTotalCash;
+            if(variance < 0)
+            {
+                Variance.Foreground = System.Windows.Media.Brushes.Red;
+                return;
+            }
             Variance.Text = variance.ToString("C");
+        }
+
+        private decimal EndOfDayAuxiliaryTotalCash()
+        {
+            var totalcash = TotalTextBlock.Text;
+            return ToDecimal(totalcash);
+        }
+
+        private decimal EndOfDayAuxiliaryTotalCashSales()
+        {
+            var totalCashSales = TotalCashSales.Text;
+            return ToDecimal(totalCashSales);
+        }
+
+        private decimal EndOfDayAuxiliaryTotalCreditSales()
+        {
+            var totalCreditSales = TotalCreditSales.Text;
+            return ToDecimal(totalCreditSales);
         }
 
         // Convert string to decimal
@@ -129,12 +156,47 @@ namespace Retail_PointOfSales
             
         }
 
-        //Fix it later - colect the data from the TotalTextBlock every time it changes
-        // is possibility to add TextChanged="EndOfDayVariance" to the TotalTextBlock in the xmal file
-        //private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    EndOfDayVariance(sender, e);
-        //}
+        //Method to calculate the credit sales for the day - data retrieving from sales.json file
+        private decimal CalculateCreditSales()
+        {
+            // Get the sales data from the JSON file
+            var sales = salesManager.LoadAllSales();
 
+            //Filters the sales data based on sales payed with CreditCard and the sale date is today
+            IEnumerable<Sale> creditSales = sales.Where(s => s.PaymentMethod == "CreditCard" && DateTime.TryParse(s.SaleDate, out DateTime saleDate) && saleDate.Date == DateTime.Now.Date);
+
+            // Retrieve the Total data from the filtered creditSales
+            var totalValues = creditSales.Select(s => s.Total).ToList();
+
+            // Calculate the total CreditCard sales
+            decimal sumTotalValues = (decimal)totalValues.Sum();
+            //Console.WriteLine(sumTotalValues); //This line is to test the sumTotalValues on console
+            // Display the total CreditCard sales
+            TotalCreditSales.Text = sumTotalValues.ToString("C");
+
+            return sumTotalValues;
+        }
+
+        // Method to calculate the total sales for the day - data retrieving from sales.json file
+        private void TotalSales()
+        {
+            var sales = salesManager.LoadAllSales();
+            IEnumerable<Sale> TotalSales = sales.Where(s => DateTime.TryParse(s.SaleDate, out DateTime saleDate) && saleDate.Date == DateTime.Now.Date);
+            var totalValues = TotalSales.Select(s => s.Total).ToList();
+            var cashSales = EndOfDayAuxiliaryTotalCashSales();
+            var creditSales = EndOfDayAuxiliaryTotalCreditSales();
+            //Checks if the sum of cash and credit sales field in this windows matches the total sales value in the saved history file
+            if (cashSales + creditSales == totalValues.Sum())
+            {
+                TotalSalesValue.Text = "Total Sales: " + totalValues.Sum().ToString("C");
+            }
+            else
+            {
+                MessageBox.Show("The total sales value does not match the sum of cash and credit sales in the saved history. Please check database",
+                                "Total Sales Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
+            }
+        }
     }
 }

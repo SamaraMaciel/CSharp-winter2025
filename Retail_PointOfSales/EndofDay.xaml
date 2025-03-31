@@ -120,14 +120,14 @@
             <TextBlock Text="Credit Card Transactions" FontSize="15" FontWeight="Bold" Margin="0,15,0,10" Foreground="LawnGreen"/>
             <StackPanel Orientation="Horizontal" Margin="0,5">
                 <TextBlock Text="Credit Card:" Width="150" VerticalAlignment="Center" FontSize="15"/>
-                <TextBox Text="$0.00" HorizontalAlignment="Left" FontWeight="UltraBold" FontSize="15" BorderThickness="0" Background="Transparent" Foreground="LightGoldenrodYellow" />
+                <TextBox x:Name="TotalCreditSales" Text="$0.00" HorizontalAlignment="Left" FontWeight="UltraBold" FontSize="15" BorderThickness="0" Background="Transparent" Foreground="LightGoldenrodYellow" />
             </StackPanel>
             <Border Height="5" Background="Yellow" Margin="0,5"/>
             <!-- Total Sales of the Day -->
             <TextBlock Text="Day Total Sales" FontSize="15" FontWeight="Bold" Margin="0,15,0,10" Foreground="LawnGreen"/>
             <StackPanel Orientation="Horizontal" Margin="0,5">
                 <TextBlock Text="Total Sales:" Width="150" VerticalAlignment="Center" FontSize="15"/>
-                <TextBox Text="$0.00" HorizontalAlignment="Left" FontWeight="UltraBold" FontSize="15" BorderThickness="0" Background="Transparent" Foreground="LightGoldenrodYellow"/>
+                <TextBox Name="TotalSalesValue" Text="$0.00" HorizontalAlignment="Left" FontWeight="UltraBold" FontSize="15" BorderThickness="0" Background="Transparent" Foreground="LightGoldenrodYellow"/>
             </StackPanel>
         </StackPanel>
 
