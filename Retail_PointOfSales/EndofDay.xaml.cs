@@ -125,7 +125,7 @@ namespace Retail_PointOfSales
             if(variance < 0)
             {
                 Variance.Foreground = System.Windows.Media.Brushes.Red;
-                return;
+                //return;
             }
             Variance.Text = variance.ToString("C");
         }
