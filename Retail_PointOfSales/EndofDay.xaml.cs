@@ -22,6 +22,7 @@ namespace Retail_PointOfSales
             CalculateCashSales();
             CalculateCreditSales();
             TotalSales();
+            CalculateExpectedCash();
             //EndOfDayVariance(); //initialize the EndOfDayVariance method when loading the window
             //TextBox_TextChanged();
         }
@@ -72,8 +73,8 @@ namespace Retail_PointOfSales
 
                 // Display the total
                 TotalTextBlock.Text = total.ToString("C");
-                EndOfDayAuxiliaryTotalCash();
-                EndOfDayVariance();
+                EndOfDayAuxiliaryTotalCash(); //updates the total cash value in this method every time total cash count text changes
+                EndOfDayVariance(); //updates the value of variance every time totalcash count text changes
             }
             catch (Exception)
             {
@@ -120,12 +121,15 @@ namespace Retail_PointOfSales
         private void EndOfDayVariance() //work in prgress - SM needs to catch the value of TotalTextBlock every time it changes
         {
             var endOfDayTotalCash = EndOfDayAuxiliaryTotalCash();
-            var edOfDayCashSales = TotalCashSales.Text;
-            var variance = ToDecimal(edOfDayCashSales) - endOfDayTotalCash;
+            var endOfDayExpectedCash = EndOfDayAuxiliaryExpectedCash();
+            var variance = endOfDayExpectedCash - endOfDayTotalCash;
             if(variance < 0)
             {
                 Variance.Foreground = System.Windows.Media.Brushes.Red;
-                //return;
+            }
+            else
+            {
+                Variance.Foreground = System.Windows.Media.Brushes.LightGoldenrodYellow;
             }
             Variance.Text = variance.ToString("C");
         }
@@ -148,10 +152,21 @@ namespace Retail_PointOfSales
             return ToDecimal(totalCreditSales);
         }
 
+        private decimal EndOfDayAuxiliaryOpeningFund()
+        {
+            var openingFund = OpeningFund.Text;
+            return ToDecimal(openingFund);
+        }
+        private decimal EndOfDayAuxiliaryExpectedCash()
+        {
+            var expectedCash = ExpectedCash.Text;
+            return ToDecimal(expectedCash);
+        }
+
         // Convert string to decimal
         private static decimal ToDecimal(string value)
         {
-            Console.WriteLine(decimal.Parse(value, System.Globalization.NumberStyles.Currency)); 
+            //Console.WriteLine(decimal.Parse(value, System.Globalization.NumberStyles.Currency)); 
             return decimal.Parse(value, System.Globalization.NumberStyles.Currency);
             
         }
@@ -197,6 +212,12 @@ namespace Retail_PointOfSales
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Warning);
             }
+        }
+
+        private void CalculateExpectedCash()
+        {
+            var totalExpectedCash = EndOfDayAuxiliaryOpeningFund() + EndOfDayAuxiliaryTotalCashSales();
+            ExpectedCash.Text = totalExpectedCash.ToString("C");
         }
     }
 }
