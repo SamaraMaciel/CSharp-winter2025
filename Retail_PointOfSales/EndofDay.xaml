@@ -105,6 +105,11 @@
                 <TextBlock Text="Cash Sales:" Width="150" VerticalAlignment="Center" FontSize="15"/>
                 <TextBox x:Name="TotalCashSales" Text="$0.00" HorizontalAlignment="Left" FontWeight="UltraBold" FontSize="15" BorderThickness="0" Background="Transparent" Foreground="LightGoldenrodYellow" />
             </StackPanel>
+            <!-- Expected Cash -->
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <TextBlock Text="Expected Cash:" Width="150" VerticalAlignment="Center" FontSize="15"/>
+                <TextBox x:Name="ExpectedCash" Text="$0.00" HorizontalAlignment="Left" FontWeight="UltraBold" FontSize="15" BorderThickness="0" Background="Transparent" Foreground="LightGoldenrodYellow" />
+            </StackPanel>
             <!-- Actual Cash Count -->
             <StackPanel Orientation="Horizontal" Margin="0,5">
                 <TextBlock Text="Total Cash Count:" Width="150" VerticalAlignment="Center" FontSize="15"/>

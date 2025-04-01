@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Retail_PointOfSales"
         mc:Ignorable="d"
-       Title="MainWindow" MaxHeight="750" MaxWidth="960" Background="Gray" ResizeMode="NoResize">
+       Title="MainWindow" MaxHeight="750" MaxWidth="960" Background="Gray" >
     
 
     <Grid Background="#FF201919">
@@ -59,13 +59,15 @@
             <!-- Search Panel (Hidden Initially) -->
             <Border x:Name="SearchPanel" Background="White" Visibility="Collapsed"
                     BorderBrush="Black" BorderThickness="2" Padding="10"
-                    VerticalAlignment="Center" HorizontalAlignment="Center">
+                    HorizontalAlignment="Center" VerticalAlignment="Center">
                 <!-- ScrollViewr element set to "Auto" adds a scrollbar in the Search Panel when the view is smaller than the panel vertical size -->
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
+                    <StackPanel MaxHeight="500">
                         <TextBox x:Name="SearchTextBox2"/>
-                        <Button Content="Search by product" Width="120" Margin="10,0,0,0" Click="SearchButton_Click"  />
-                        <ListView x:Name="SearchPanel_ProductList" SelectionChanged="ProductSelected" BorderBrush="Aqua">
+                    <Grid Grid.Row="1" Grid.Column="2" >
+                        <Button HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" Content="Search by product" Width="120" Margin="50,5,0,5" Click="SearchButton_Click"  />
+                        <Button HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1" Content="Close" Click="CloseSearchPanel" Width="120" Margin="0,5,50,5" />
+                    </Grid>
+                    <ListView x:Name="SearchPanel_ProductList" SelectionChanged="ProductSelected" BorderBrush="Aqua" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="300">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding ProductId}" Width="100"></GridViewColumn>
@@ -74,9 +76,7 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                        <Button Content="Close" Click="CloseSearchPanel"/>
                     </StackPanel>
-                </ScrollViewer>
                 
             </Border>
 
@@ -200,7 +200,7 @@
 
             <!-- Sales Report Button -->
             <Button Grid.Row="5" Grid.Column="0" Width="110" Height="80" Margin="10,10,10,0"  Background="#FF1F1D1D" Foreground="AntiqueWhite" 
-        Click="SalesReportButton_Click" BorderBrush="Aqua" >
+                Click="SalesReportButton_Click" BorderBrush="Aqua" >
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                     <!-- Image -->
                     <Image Source="Images/end-of-year.png" Width="30" Height="30" Margin="5,10,5,5"/>
