@@ -9,7 +9,7 @@ namespace Retail_PointOfSales
     /// It handles user interactions, including updating the date and time, searching for products,
     /// adding products to the cart, and managing the sale process.
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         private List<Product> _products;
         // Initializing the actual date and time and setting it to the actualDate variable
@@ -25,7 +25,6 @@ namespace Retail_PointOfSales
         public MainWindow()
         {
             InitializeComponent();
-            // MainContent.Content = new Login(); 
 
             // Initializes a new instance of the Timer class that raises an event every 1000 milliseconds (1 second)
             var timer = new System.Timers.Timer(1000);
@@ -51,16 +50,6 @@ namespace Retail_PointOfSales
                 });
             }
                 
-        }
-
-        /// <summary>
-        /// Event handler for the TextChanged event of the Search TextBox.
-        /// Placeholder functionality for implementing a search feature using a combo box.
-        /// </summary>
-        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            // Just placeholder functionality if we want a combo box search
-            // We can omit this if we don't have enough time
         }
 
         /// <summary>
@@ -361,6 +350,5 @@ namespace Retail_PointOfSales
                 }
             }
         }
-
     }
 }

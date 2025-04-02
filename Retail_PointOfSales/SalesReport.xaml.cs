@@ -96,8 +96,7 @@ namespace Retail_PointOfSales
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-
-
+        
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();

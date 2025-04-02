@@ -32,12 +32,8 @@
         <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Background="Aqua" >
             <TextBlock Text="POINT OF SALE" FontSize="16" FontWeight="Bold" Margin="5,0,0,0" Foreground="Black" FontFamily="Gadugi" Width="965" />
         </Grid>
-
-        <!-- Search Label -->
+        
         <StackPanel  Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,5,0,0">
-            <Label Content="Search" VerticalAlignment="Center" Margin="0,0,0,0" Foreground="AntiqueWhite" 
-           VerticalContentAlignment="Center" HorizontalAlignment="Left" FontSize="15"/>
-            <TextBox x:Name="SearchTextBox" Width="500" Height="30" Margin="0,0,0,0" TextChanged="SearchTextBox_TextChanged"/>
             <Button Content="Add Product" Width="85" Height="30" Margin="20,0,0,0" Click="OpenSearchPanel" FontWeight="SemiBold" />
         </StackPanel>
 
