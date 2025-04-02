@@ -64,16 +64,6 @@ namespace Retail_PointOfSales
         }
 
         /// <summary>
-        /// Event handler for the SelectionChanged event of the Product ComboBox.
-        /// Placeholder functionality for implementing a combo box search.
-        /// </summary>
-        private void ProductComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // Just placeholder functionality if we want a combo box search
-            // We can omit this if we don't have enough time
-        }
-
-        /// <summary>
         /// Event handler for the Opening Fund Button click.
         /// Opens a new window to handle the opening fund process.
         /// </summary>
@@ -91,7 +81,7 @@ namespace Retail_PointOfSales
         /// </summary>
         private void OpenSearchPanel(object sender, RoutedEventArgs e)
         {
-            SearchTextBox2.Text = ""; //Clears the text on search box if any
+            SearchTextBoxProductsPanel.Text = ""; //Clears the text on search box if any
             SearchPanel.Visibility = Visibility.Visible;
             SearchPanel_ProductList.ItemsSource = productManager.LoadAllProducts(); // Load Products
         }
@@ -177,7 +167,7 @@ namespace Retail_PointOfSales
         /// </summary>
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            string searchText = SearchTextBox2.Text.ToLower(); // Get the search text from user input
+            string searchText = SearchTextBoxProductsPanel.Text.ToLower(); // Get the search text from user input
             var result = productManager.Search(searchText); // Search for matching products
             if (result != null)
             {
@@ -200,9 +190,7 @@ namespace Retail_PointOfSales
             EndofDay EndofDayWindow = new EndofDay();
             EndofDayWindow.ShowDialog(); // Show the EndofDay window
         }
-
-
-
+        
         /// <summary>
         /// Deletes the selected product from the cart.
         /// </summary>
@@ -262,11 +250,20 @@ namespace Retail_PointOfSales
                 Subtotal = decimal.Parse(TotalTextBlock.Text),
                 Total = decimal.Parse(TotalTextBlock.Text)
             };
-            
-            CashPayment CashPaymentWindow = new CashPayment(sale);
 
+            CashPayment CashPaymentWindow = new CashPayment(sale);
             // Show the CashPayment window
             CashPaymentWindow.ShowDialog();
+            if (CashPaymentWindow.DialogResult == true)
+            {
+                MessageBox.Show(
+                    "Thank you for your purchase with us.", 
+                    "Purchase completed", 
+                    MessageBoxButton.OK, MessageBoxImage.Information
+                    );
+                ProductListView.Items.Clear();
+                TotalTextBlock.Text = "";
+            }
         }
 
         private void SalesReportButton_Click(object sender, RoutedEventArgs e)
@@ -300,9 +297,18 @@ namespace Retail_PointOfSales
             };
             
             CreditPayment CreditPaymentWindow = new CreditPayment(sale);
-
             // Show the CreditPayment window
             CreditPaymentWindow.ShowDialog();
+            if (CreditPaymentWindow.DialogResult == true)
+            {
+                MessageBox.Show(
+                    "Thank you for your purchase with us.", 
+                    "Purchase completed", 
+                    MessageBoxButton.OK, MessageBoxImage.Information
+                );
+                ProductListView.Items.Clear();
+                TotalTextBlock.Text = "";
+            }
         }
 
         // Exits the application in WPF
@@ -322,7 +328,7 @@ namespace Retail_PointOfSales
         /// </summary>
         private void VoidOrder_Click(object sender, RoutedEventArgs e)
         {
-            // Checksif the cart is empty
+            // Checks if the cart is empty
             if (ProductListView.Items.Count == 0)
             {
                 // Show a warning message if the cart is empty
@@ -332,11 +338,7 @@ namespace Retail_PointOfSales
             {
                 //Validate if the user really wants to void the order
                 MessageBoxResult result = MessageBox.Show("Are you sure you want to void the order?", "Void order", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                if (result == MessageBoxResult.No)
-                {
-                    return;
-                }
-                else
+                if (result != MessageBoxResult.No)
                 {
                     ProductListView.Items.Clear(); // Clear the product list
                     UpdateSaleTotal(); // Update the sale total

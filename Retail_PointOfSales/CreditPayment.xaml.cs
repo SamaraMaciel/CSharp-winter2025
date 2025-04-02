@@ -84,6 +84,7 @@ namespace Retail_PointOfSales
             
             SaleManager saleManager = new SaleManager();
             saleManager.SaveSale(sale);
+            DialogResult = true;
             Close();
         }
     }
