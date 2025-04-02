@@ -21,10 +21,18 @@
             <DatePicker Name="EndDatePicker" Width="150" Margin="0,0,20,0" />
             <Button Content="Generate Report" FontWeight="Bold" Foreground="White" Width="120" Name="GenerateReportButton" Click="GenerateReportButton_Click" Background="Green"/>
         </StackPanel>
-
+        
         <!-- Sales DataGrid With Scroll Bar -->
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <DataGrid Name="SalesDataGrid" AutoGenerateColumns="True" Margin="10,0,10,10" Height="450" Width="Auto"   BorderBrush="Aqua" BorderThickness="2"/>
+            <DataGrid Name="SalesDataGrid" AutoGenerateColumns="False" Margin="10,0,10,10" Height="450" Width="Auto" BorderBrush="Aqua" BorderThickness="2">
+                <!-- Manually define columns -->
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Sale Id" Binding="{Binding SaleId}" Width="120"/>
+                    <DataGridTextColumn Header="Sale Date" Binding="{Binding SaleDate}" Width="120"/>
+                    <DataGridTextColumn Header="Product" Binding="{Binding Product}" Width="120" />
+                    <DataGridTextColumn Header="Sale Total" Binding="{Binding Total, StringFormat=C}" Width="120" />
+                </DataGrid.Columns>
+            </DataGrid>
         </ScrollViewer>
 
         <!-- Total Sales and Buttons Section -->
@@ -34,7 +42,7 @@
             <TextBlock Name="TotalSalesText" FontWeight="Bold" Margin="0,0,60,0"/>
 
             <!-- Buttons -->
-            <Button Content="Save" Width="100" Height="30" Name="SaveButton" Margin="350,0,10,10" Background="Blue" Foreground="White" Click="SaveButton_Click"/>
+            <Button Content="Save" Width="100" Height="30" Name="SaveButton" Margin="350,0,10,10" Background="Blue" Foreground="White" Click="SaveReportButton_Click"/>
             <Button Content="Close" Width="100" Height="30" Name="CloseButton" Margin="10,0,10,10" Background="Red" Foreground="White" Click="CloseButton_Click"/>
         </StackPanel>
     </Grid>

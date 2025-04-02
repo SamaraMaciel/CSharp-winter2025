@@ -19,3 +19,11 @@ public enum PaymentMethod
     Cash = 0,
     CreditCard = 1,
 }
+
+public class SaleReportItem
+{
+    public string SaleId { get; set; }
+    public string SaleDate { get; set; }
+    public string Product { get; set; }
+    public decimal Total { get; set; }
+}
