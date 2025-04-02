@@ -232,6 +232,14 @@ namespace Retail_PointOfSales
 
         private void CashPaymentButton_Click(object sender, RoutedEventArgs e)
         {
+            if (ProductListView.Items.Count == 0)
+            {
+                // Show a warning message if the cart is empty
+                MessageBox.Show("The order is empty!", "Empty order",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            
             List<Product> products = new List<Product>();
             
             foreach (var item in ProductListView.Items)
@@ -277,6 +285,14 @@ namespace Retail_PointOfSales
 
         private void CreditPaymentButton_Click(object sender, RoutedEventArgs e)
         {
+            if (ProductListView.Items.Count == 0)
+            {
+                // Show a warning message if the cart is empty
+                MessageBox.Show("The order is empty!", "Empty order",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            
             List<Product> products = new List<Product>();
             
             foreach (var item in ProductListView.Items)
@@ -332,7 +348,7 @@ namespace Retail_PointOfSales
             if (ProductListView.Items.Count == 0)
             {
                 // Show a warning message if the cart is empty
-                MessageBox.Show("The order is empty!", "Warning");
+                MessageBox.Show("The order is empty!", "Empty order");
             }
             else
             {
