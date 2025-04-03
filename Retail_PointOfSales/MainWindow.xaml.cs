@@ -49,7 +49,6 @@ namespace Retail_PointOfSales
                     TimeTextBox.Text = actualDate.ToString("HH:mm:ss");
                 });
             }
-                
         }
 
         /// <summary>
@@ -70,7 +69,7 @@ namespace Retail_PointOfSales
         /// </summary>
         private void OpenSearchPanel(object sender, RoutedEventArgs e)
         {
-            SearchTextBoxProductsPanel.Text = ""; //Clears the text on search box if any
+            SearchTextBoxProductsPanel.Text = ""; // Clears the text on the search box if any
             SearchPanel.Visibility = Visibility.Visible;
             SearchPanel_ProductList.ItemsSource = productManager.LoadAllProducts(); // Load Products
         }
@@ -185,26 +184,36 @@ namespace Retail_PointOfSales
         /// </summary>
         private void DeleteProduct(object sender, RoutedEventArgs e)
         {
-            //Console.WriteLine(ProductListView);
+            // Check if there are no products in the cart (empty list)
             if (ProductListView.Items.Count == 0)
             {
+                // Show a message if the cart is empty
                 MessageBox.Show("No products to delete!");
-                return;
+                return; // Exit the method if the cart is empty
             }
+            // Check if no product is selected (no item in ProductListView is highlighted)
             else if (ProductListView.SelectedIndex.Equals(-1))
             {
+                // Show a message if no product is selected for deletion
                 MessageBox.Show("Please select a product to delete.");
-                return;
+                return; // Exit the method if no product is selected
             }
             else
             {
-                int productToRemove = ProductListView.SelectedIndex; // Get the selected product index
-                if (productToRemove.Equals(-1)) return; // Prevents exceptions when clicking delete button with no product selected
-                ProductListView.Items.RemoveAt(productToRemove); // Remove the product from the list
-                UpdateSaleTotal(); // Update the sale total
+                // Get the index of the selected product in the ProductListView
+                int productToRemove = ProductListView.SelectedIndex; 
+        
+                // Prevents the method from running if the selected index is invalid (-1)
+                if (productToRemove.Equals(-1)) return; 
+        
+                // Remove the selected product from the ProductListView
+                ProductListView.Items.RemoveAt(productToRemove); 
+        
+                // Update the sale total after deleting a product
+                UpdateSaleTotal(); 
             }
         }
-
+        
         /// <summary>
         /// Updates the total sale amount by summing up the prices of the items in the cart.
         /// </summary>
@@ -219,112 +228,146 @@ namespace Retail_PointOfSales
             TotalTextBlock.Text = total.ToString("0.00"); // Update the total display with the formatted value
         }
 
-        private void CashPaymentButton_Click(object sender, RoutedEventArgs e)
-        {
+        /// <summary>
+        /// Opens the Cash Payment window for completing the sale.
+        /// </summary>
+       private void CashPaymentButton_Click(object sender, RoutedEventArgs e)
+        { 
+            // Check if there are no items in the cart (empty order)
             if (ProductListView.Items.Count == 0)
             {
                 // Show a warning message if the cart is empty
                 MessageBox.Show("The order is empty!", "Empty order",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
+                return; // Exit the method if the cart is empty
             }
-            
+    
+            // Create a list to store the products in the cart
             List<Product> products = new List<Product>();
-            
+    
+            // Loop through each item in the ProductListView (the cart)
             foreach (var item in ProductListView.Items)
             {
+                // If the item is of type Product, add it to the products list
                 if (item is Product product)
                 {
                     products.Add(product);
                 }
             }
-            
+    
+            // Create a new Sale object to represent the sale details
             Sale sale = new Sale
             {
-                Products = products,
-                PaymentMethod = PaymentMethod.Cash.ToString(),
-                SaleId = Guid.NewGuid().ToString(),
-                Subtotal = decimal.Parse(TotalTextBlock.Text),
-                Total = decimal.Parse(TotalTextBlock.Text)
+                Products = products, // Assign the list of products to the sale
+                PaymentMethod = PaymentMethod.Cash.ToString(), // Set the payment method to "Cash"
+                SaleId = Guid.NewGuid().ToString(), // Generate a new unique Sale ID
+                Subtotal = decimal.Parse(TotalTextBlock.Text), // Parse the subtotal from the total text block
+                Total = decimal.Parse(TotalTextBlock.Text), // Set the total to the same as the subtotal for now
             };
 
+            // Create a new instance of the CashPayment window, passing in the sale details
             CashPayment CashPaymentWindow = new CashPayment(sale);
-            // Show the CashPayment window
+    
+            // Show the CashPayment window as a modal dialog
             CashPaymentWindow.ShowDialog();
+    
+            // If the user confirms the payment (DialogResult is true)
             if (CashPaymentWindow.DialogResult == true)
             {
-                MessageBox.Show(
-                    "Thank you for your purchase with us.", 
-                    "Purchase completed", 
-                    MessageBoxButton.OK, MessageBoxImage.Information
-                    );
-                ProductListView.Items.Clear();
-                TotalTextBlock.Text = "";
-            }
-        }
-
-        private void SalesReportButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-            SalesReport SalesReportWindow = new SalesReport();
-
-            // Show the SalesReport window
-            SalesReportWindow.ShowDialog();
-        }
-
-        private void CreditPaymentButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (ProductListView.Items.Count == 0)
-            {
-                // Show a warning message if the cart is empty
-                MessageBox.Show("The order is empty!", "Empty order",
-                    MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            
-            List<Product> products = new List<Product>();
-            
-            foreach (var item in ProductListView.Items)
-            {
-                if (item is Product product)
-                {
-                    products.Add(product);
-                }
-            }
-            
-            Sale sale = new Sale
-            {
-                Products = products,
-                PaymentMethod = PaymentMethod.CreditCard.ToString(),
-                SaleId = Guid.NewGuid().ToString(),
-                Subtotal = decimal.Parse(TotalTextBlock.Text),
-                Total = decimal.Parse(TotalTextBlock.Text),
-            };
-            
-            CreditPayment CreditPaymentWindow = new CreditPayment(sale);
-            // Show the CreditPayment window
-            CreditPaymentWindow.ShowDialog();
-            if (CreditPaymentWindow.DialogResult == true)
-            {
+                // Show a confirmation message to the user
                 MessageBox.Show(
                     "Thank you for your purchase with us.", 
                     "Purchase completed", 
                     MessageBoxButton.OK, MessageBoxImage.Information
                 );
+        
+                // Clear the cart (ProductListView) and reset the total display
                 ProductListView.Items.Clear();
                 TotalTextBlock.Text = "";
             }
         }
 
-        // Exits the application in WPF
+        /// <summary>
+        /// Opens the Sales Report window.
+        /// </summary>
+        private void SalesReportButton_Click(object sender, RoutedEventArgs e)
+        {
+            SalesReport SalesReportWindow = new SalesReport();
+            // Show the SalesReport window
+            SalesReportWindow.ShowDialog();
+        }
+
+        /// <summary>
+        /// Opens the Credit Payment window for completing the sale.
+        /// </summary>
+        private void CreditPaymentButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Check if there are no items in the cart (empty order)
+            if (ProductListView.Items.Count == 0)
+            {
+                // Show a warning message if the cart is empty
+                MessageBox.Show("The order is empty!", "Empty order",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return; // Exit the method if the cart is empty
+            }
+    
+            // Create a list to store the products in the cart
+            List<Product> products = new List<Product>();
+    
+            // Loop through each item in the ProductListView (the cart)
+            foreach (var item in ProductListView.Items)
+            {
+                // If the item is of type Product, add it to the products list
+                if (item is Product product)
+                {
+                    products.Add(product);
+                }
+            }
+    
+            // Create a new Sale object to represent the sale details
+            Sale sale = new Sale
+            {
+                Products = products, // Assign the list of products to the sale
+                PaymentMethod = PaymentMethod.CreditCard.ToString(), // Set the payment method to "CreditCard"
+                SaleId = Guid.NewGuid().ToString(), // Generate a new unique Sale ID
+                Subtotal = decimal.Parse(TotalTextBlock.Text), // Parse the subtotal from the total text block
+                Total = decimal.Parse(TotalTextBlock.Text), // Set the total to the same as the subtotal for now
+            };
+    
+            // Create a new instance of the CreditPayment window, passing in the sale details
+            CreditPayment CreditPaymentWindow = new CreditPayment(sale);
+    
+            // Show the CreditPayment window as a modal dialog
+            CreditPaymentWindow.ShowDialog();
+    
+            // If the user confirms the payment (DialogResult is true)
+            if (CreditPaymentWindow.DialogResult == true)
+            {
+                // Show a confirmation message to the user
+                MessageBox.Show(
+                    "Thank you for your purchase with us.", 
+                    "Purchase completed", 
+                    MessageBoxButton.OK, MessageBoxImage.Information
+                );
+        
+                // Clear the cart (ProductListView) and reset the total display
+                ProductListView.Items.Clear();
+                TotalTextBlock.Text = "";
+            }
+        }
+
+
+        /// <summary>
+        /// Exits the application in WPF
+        /// </summary>
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Are you sure you want to exit?", "Exit Confirmation",
-            MessageBoxButton.YesNo, MessageBoxImage.Question);
-
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+            
             if (result == MessageBoxResult.Yes)
             {
-                Application.Current.Shutdown(); 
+                Application.Current.Shutdown(); // If result == Yes, close the aplication
             }
         }
 
