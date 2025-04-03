@@ -15,7 +15,7 @@ public class OpeningFunds
 
     // Property to store the date when the opening funds are recorded.
     public string Date { get; set; }
-    
+
     /// <summary>
     /// Saves the opening funds data to a JSON file at the specified file path.
     /// This method serializes the provided OpeningFunds object into a JSON formatted string
@@ -34,5 +34,34 @@ public class OpeningFunds
         // Serialize the OpeningFunds object (fundData) and write it to the file.
         // This converts the OpeningFunds object into a JSON formatted string and saves it in the file.
         serializer.Serialize(fileToWrite, fundData);
+    }
+
+    public List<OpeningFunds> LoadAllOpenFunds()
+    {
+        // Initialize an empty list to hold the open fund data
+        List<OpeningFunds> openingFunds = new List<OpeningFunds>();
+
+        // OpeningFunds openingFund = JsonConvert.DeserializeObject<OpeningFunds>(filePath);
+
+
+        // Check if the file exists at the specified file path
+        if (File.Exists(filePath))
+        {
+            // Open the file to read its contents
+            using StreamReader fileToRead = new StreamReader(filePath);
+            string json = fileToRead.ReadToEnd();
+
+            // If the file is not empty, deserialize the JSON content into a list of Sale objects
+            if (!string.IsNullOrEmpty(json))
+            {
+                //this line is returning an error, because json file is save in the format: {} as object and not [{}] as list
+                //needs fixig - its throughing an error
+                openingFunds = JsonConvert.DeserializeObject<List<OpeningFunds>>(json) ?? new List<OpeningFunds>();
+            }
+        }
+
+        // Return the list of sales
+        return openingFunds;
+
     }
 }

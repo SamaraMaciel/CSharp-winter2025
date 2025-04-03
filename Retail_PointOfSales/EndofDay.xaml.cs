@@ -11,7 +11,8 @@ namespace Retail_PointOfSales
     public partial class EndofDay : Window
     {
         private List<Sale> sales; // work in progress - SM
-        SaleManager salesManager = new(); // work in progress - SM
+        SaleManager salesManager = new(); // instanciate a new class of SaleManager
+        OpeningFunds openingFunds = new OpeningFunds(); // instanciate a new class of OpeningFunds
         //public decimal total { get; set; } //Making the total a property to be used in the EndOfDayVariance method
 
 
@@ -19,6 +20,7 @@ namespace Retail_PointOfSales
         {
             InitializeComponent();
             //initialize the CalculateCashSales method when loading this window
+            OpenFundReturn();
             CalculateCashSales();
             CalculateCreditSales();
             TotalSales();
@@ -218,6 +220,26 @@ namespace Retail_PointOfSales
         {
             var totalExpectedCash = EndOfDayAuxiliaryOpeningFund() + EndOfDayAuxiliaryTotalCashSales();
             ExpectedCash.Text = totalExpectedCash.ToString("C");
+        }
+
+        // work in progress - methos to return the opening fund of the day into the endOfDay window
+        // There is a format error in the JSON file, it is saving the data as an object and not as a list - needs fixing
+        private void OpenFundReturn()
+        {
+            // Get the open fund data from the JSON file
+            var openFund = openingFunds.LoadAllOpenFunds();
+
+            //Filters the open fund data based on date is today
+            IEnumerable<OpeningFunds> openFundDay = openFund.Where(s => DateTime.TryParse(s.Date, out DateTime date) && date.Date == DateTime.Now.Date);
+
+            // Retrieve the Total data from the filtered cashSales
+            var totalFunds = openFundDay.Select(s => s.Total).ToList();
+
+            // Calculate the total cash sales
+            decimal sumTotalFunds = (decimal)totalFunds.Sum();
+            //Console.WriteLine(sumTotalValues); //This line is to test the sumTotalValues on console
+            // Display the total cash sales
+            OpeningFund.Text = sumTotalFunds.ToString("C");
         }
     }
 }
