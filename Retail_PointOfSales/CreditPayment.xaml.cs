@@ -61,7 +61,14 @@ namespace Retail_PointOfSales
         
         private void EnterButton_Click(object sender, RoutedEventArgs e)
         {
+            string discount = DiscountTextBox.Text;
             string creditCardText = CreditCardNoTextBox.Text;
+            if (string.IsNullOrWhiteSpace(discount) || string.IsNullOrWhiteSpace(creditCardText))
+            {
+                MessageBox.Show("Discount and Credit card number are required fields.");
+                return;   
+            }
+            
             string creditCardToSave = new string('x', 8) + creditCardText.Substring(8);
             Sale sale = new Sale
             {

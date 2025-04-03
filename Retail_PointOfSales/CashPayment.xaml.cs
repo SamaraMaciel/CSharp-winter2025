@@ -62,6 +62,15 @@ namespace Retail_PointOfSales
         // Event handler for Enter button click, 
         private void EnterButton_Click(object sender, RoutedEventArgs e)
         {
+            string discount = DiscountTextBox.Text;
+            string cashTendered = CashTenderedTextBox.Text;
+
+            if (string.IsNullOrWhiteSpace(discount) || string.IsNullOrWhiteSpace(cashTendered))
+            {
+                MessageBox.Show($"Discount and Cash tendered are required fields.");
+                return;
+            }
+            
             Sale sale = new Sale
             {
                 SaleId = closingSale.SaleId,
