@@ -121,11 +121,15 @@ namespace Retail_PointOfSales
                     MessageBoxButton.OK, MessageBoxImage.Information);
                 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show($"Error: JSON FILE ");  
+                // If something goes wrong during the saving operation show a message
+                MessageBox.Show($"An error occurred while saving the opening fund data.\n\n" +
+                                $"Details: {ex.Message}", 
+                    "Error", 
+                    MessageBoxButton.OK, 
+                    MessageBoxImage.Error);
             }
-
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
