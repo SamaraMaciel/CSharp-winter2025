@@ -124,7 +124,7 @@ namespace Retail_PointOfSales
         {
             var endOfDayTotalCash = EndOfDayAuxiliaryTotalCash();
             var endOfDayExpectedCash = EndOfDayAuxiliaryExpectedCash();
-            var variance = endOfDayExpectedCash - endOfDayTotalCash;
+            var variance = endOfDayTotalCash - endOfDayExpectedCash;
             if(variance < 0)
             {
                 Variance.Foreground = System.Windows.Media.Brushes.Red;
@@ -222,22 +222,22 @@ namespace Retail_PointOfSales
             ExpectedCash.Text = totalExpectedCash.ToString("C");
         }
 
-        // work in progress - methos to return the opening fund of the day into the endOfDay window
-        // There is a format error in the JSON file, it is saving the data as an object and not as a list - needs fixing
+        // Method to return the opening fund of the day, daved in the openingFunds.json file
+        // into the endOfDay window
         private void OpenFundReturn()
         {
-            // Get the open fund data from the JSON file
+            // Get the open openFund data from the JSON file
             var openFund = openingFunds.LoadAllOpenFunds();
 
-            //Filters the open fund data based on date is today
+            //Filters the openFund data based on date is today
             IEnumerable<OpeningFunds> openFundDay = openFund.Where(s => DateTime.TryParse(s.Date, out DateTime date) && date.Date == DateTime.Now.Date);
 
-            // Retrieve the Total data from the filtered cashSales
+            // Retrieve the Total data from the filtered openFundDay
             var totalFunds = openFundDay.Select(s => s.Total).ToList();
 
             // Calculate the total cash sales
             decimal sumTotalFunds = (decimal)totalFunds.Sum();
-            //Console.WriteLine(sumTotalValues); //This line is to test the sumTotalValues on console
+
             // Display the total cash sales
             OpeningFund.Text = sumTotalFunds.ToString("C");
         }
