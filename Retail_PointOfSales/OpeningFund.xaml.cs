@@ -1,13 +1,15 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Retail_PointOfSales.Model;
 
 namespace Retail_PointOfSales
 {
     /// <summary>
     /// Interaction logic for OpeningFund.xaml
 
-    public partial class OpeningFund : Window
+    public partial class OpeningFund
     {
+        OpeningFunds newFund = new();
         public OpeningFund()
         {
             InitializeComponent();
@@ -105,9 +107,19 @@ namespace Retail_PointOfSales
 
                 // Display the total
                 TotalTextBlock.Text = total.ToString("C");
-
                 
+                // Create an instance of OpeningFundData
+                OpeningFunds fundData = new OpeningFunds
+                {
+                    Date = DateTime.Now.ToString("yyyy-MM-dd"),
+                    Total = total
+                };
+                
+                newFund.SaveOpeningFunds(fundData);
 
+                MessageBox.Show("Opening fund data has been saved successfully.", "Save Successful", 
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                
             }
             catch (Exception)
             {
@@ -118,14 +130,7 @@ namespace Retail_PointOfSales
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            //// Create an instance of the Main Window
-            //MainWindow mainWindow = new MainWindow();
-
-            //// Show the Main Window
-            //mainWindow.Show();
-
-            // Close the current Opening Fund window
-            this.Close();
+            Close();
         }
     }
 }
