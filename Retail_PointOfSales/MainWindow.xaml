@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Retail_PointOfSales"
         mc:Ignorable="d"
-       Title="MainWindow" MaxHeight="750" MaxWidth="960" Background="Gray" >
+       Title="MainWindow" MaxHeight="750" MaxWidth="960" Background="Gray" ResizeMode="NoResize" >
     
 
     <Grid Background="#FF201919">
