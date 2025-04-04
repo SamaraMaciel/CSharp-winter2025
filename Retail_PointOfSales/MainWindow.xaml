@@ -32,12 +32,8 @@
         <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Background="Aqua" >
             <TextBlock Text="POINT OF SALE" FontSize="16" FontWeight="Bold" Margin="5,0,0,0" Foreground="Black" FontFamily="Gadugi" Width="965" />
         </Grid>
-
-        <!-- Search Label -->
+        
         <StackPanel  Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,5,0,0">
-            <Label Content="Search" VerticalAlignment="Center" Margin="0,0,0,0" Foreground="AntiqueWhite" 
-           VerticalContentAlignment="Center" HorizontalAlignment="Left" FontSize="15"/>
-            <TextBox x:Name="SearchTextBox" Width="500" Height="30" Margin="0,0,0,0" TextChanged="SearchTextBox_TextChanged"/>
             <Button Content="Add Product" Width="85" Height="30" Margin="20,0,0,0" Click="OpenSearchPanel" FontWeight="SemiBold" />
         </StackPanel>
 
@@ -59,13 +55,13 @@
             <!-- Search Panel (Hidden Initially) -->
             <Border x:Name="SearchPanel" Background="White" Visibility="Collapsed"
                     BorderBrush="Black" BorderThickness="2" Padding="10"
-                    HorizontalAlignment="Center" VerticalAlignment="Center">
+                    HorizontalAlignment="Center" VerticalAlignment="Center" Height="380">
                 <!-- ScrollViewr element set to "Auto" adds a scrollbar in the Search Panel when the view is smaller than the panel vertical size -->
                     <StackPanel MaxHeight="500">
-                        <TextBox x:Name="SearchTextBox2"/>
-                    <Grid Grid.Row="1" Grid.Column="2" >
-                        <Button HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" Content="Search by product" Width="120" Margin="50,5,0,5" Click="SearchButton_Click"  />
-                        <Button HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1" Content="Close" Click="CloseSearchPanel" Width="120" Margin="0,5,50,5" />
+                        <TextBox x:Name="SearchTextBoxProductsPanel"/>
+                    <Grid>
+                        <Button HorizontalAlignment="Left" Content="Search by product" Width="120" Margin="50,5,0,5" Click="SearchButton_Click"  />
+                        <Button HorizontalAlignment="Right" Content="Close" Click="CloseSearchPanel" Width="120" Margin="0,5,50,5" />
                     </Grid>
                     <ListView x:Name="SearchPanel_ProductList" SelectionChanged="ProductSelected" BorderBrush="Aqua" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="300">
                             <ListView.View>
@@ -77,7 +73,6 @@
                             </ListView.View>
                         </ListView>
                     </StackPanel>
-                
             </Border>
 
             <!-- Quantity Panel (Hidden Initially) -->
