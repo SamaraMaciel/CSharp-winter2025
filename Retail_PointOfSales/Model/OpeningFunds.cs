@@ -48,16 +48,14 @@ public class OpeningFunds
             using StreamReader fileToRead = new StreamReader(filePath);
             string json = fileToRead.ReadToEnd();
 
-            // If the file is not empty, deserialize the JSON content into a list of Sale objects
+            // If the file is not empty, deserialize the JSON content into a list of opening funds objects
             if (!string.IsNullOrEmpty(json))
             {
-                //this line is returning an error, because json file is save in the format: {} as object and not [{}] as list
-                //needs fixig - its throughing an error
                 openingFunds = JsonConvert.DeserializeObject<List<OpeningFunds>>(json) ?? new List<OpeningFunds>();
             }
         }
 
-        // Return the list of sales
+        // Return the opening funds list
         return openingFunds;
 
     }
