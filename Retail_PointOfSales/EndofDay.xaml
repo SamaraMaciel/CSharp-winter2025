@@ -138,7 +138,7 @@
 
         <!-- Buttons -->
         <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="100,21,0,21" Width="220">
-            <Button Content="Post" Width="100" Height="28" Margin="5" Background="Green" Foreground="White"/>
+            <Button Content="Post" Width="100" Height="28" Margin="5" Background="Green" Foreground="White" Click="PostButton_Click"/>
             <Button Content="Close" Width="100" Height="28" Margin="5" Background="Red" Foreground="White" Click="CloseButton_Click"/>
         </StackPanel>
     </Grid>

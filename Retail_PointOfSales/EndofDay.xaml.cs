@@ -13,20 +13,18 @@ namespace Retail_PointOfSales
         private List<Sale> sales; // work in progress - SM
         SaleManager salesManager = new(); // instanciate a new class of SaleManager
         OpeningFunds openingFunds = new OpeningFunds(); // instanciate a new class of OpeningFunds
-        //public decimal total { get; set; } //Making the total a property to be used in the EndOfDayVariance method
+        EndOfDay newEndOfDay = new();
 
 
         public EndofDay()
         {
             InitializeComponent();
-            //initialize the CalculateCashSales method when loading this window
-            OpenFundReturn();
-            CalculateCashSales();
-            CalculateCreditSales();
-            TotalSales();
-            CalculateExpectedCash();
-            //EndOfDayVariance(); //initialize the EndOfDayVariance method when loading the window
-            //TextBox_TextChanged();
+            OpenFundReturn(); //initialize this method when loading this window
+            CalculateCashSales(); //initialize this method when loading this window
+            CalculateCreditSales(); //initialize this method when loading this window
+            TotalSales(); //initialize this method when loading this window
+            CalculateExpectedCash(); //initialize this method when loading this window
+
         }
 
         // Automatically calculate and display the sum value in the Total_TextBox
@@ -99,7 +97,7 @@ namespace Retail_PointOfSales
             this.Close();
         }
 
-        //Method to calculate the cash sales for the day - data retrieving from sales.json file
+        //Method to calculate the cash sales for the day. data retrieving from sales.json file
         private void CalculateCashSales()
         {
             // Get the sales data from the JSON file
@@ -113,14 +111,13 @@ namespace Retail_PointOfSales
 
             // Calculate the total cash sales
             decimal sumTotalValues = (decimal)totalValues.Sum();
-            //Console.WriteLine(sumTotalValues); //This line is to test the sumTotalValues on console
+
             // Display the total cash sales
             TotalCashSales.Text = sumTotalValues.ToString("C");
         }
 
-        //TotalTextBlock.TextChanged += EndOfDayVariance(); // Event handler for the EndOfDayVariance method
-        // Mtethod to calculate the variance between the cash sales and the cash counted (total cash count)
-        private void EndOfDayVariance() //work in prgress - SM needs to catch the value of TotalTextBlock every time it changes
+        // Method to calculate the variance between the cash sales and the cash counted (total cash count)
+        private void EndOfDayVariance() 
         {
             var endOfDayTotalCash = EndOfDayAuxiliaryTotalCash();
             var endOfDayExpectedCash = EndOfDayAuxiliaryExpectedCash();
@@ -240,6 +237,39 @@ namespace Retail_PointOfSales
 
             // Display the total cash sales
             OpeningFund.Text = sumTotalFunds.ToString("C");
+        }
+
+        private void PostButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Create an instance of endOfDayData
+                EndOfDay endOfDayData = new EndOfDay
+                {
+                    Date = DateTime.Now.ToString("yyyy-MM-dd"),
+                    OpeningFundEd = EndOfDayAuxiliaryOpeningFund(),
+                    CashSalesEd = EndOfDayAuxiliaryTotalCashSales(),
+                    ExpectedCashEd = EndOfDayAuxiliaryExpectedCash(),
+                    TotalCashCountEd = EndOfDayAuxiliaryTotalCash(),
+                    VarianceEd = EndOfDayAuxiliaryTotalCash() - EndOfDayAuxiliaryExpectedCash(),
+                    CreditCardSalesEd = EndOfDayAuxiliaryTotalCreditSales(),
+                    TotalSalesEd = EndOfDayAuxiliaryTotalCashSales() + EndOfDayAuxiliaryTotalCreditSales()
+                };
+
+                newEndOfDay.SaveEndOfDay(endOfDayData); // Save the endOfDay data to JSON file
+
+                MessageBox.Show("End of day data has been saved successfully.", "Save Successful",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                // If something goes wrong during the saving operation show a message
+                MessageBox.Show($"An error occurred while saving the end of day data.\n\n" +
+                                $"Details: {ex.Message}",
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
         }
     }
 }
