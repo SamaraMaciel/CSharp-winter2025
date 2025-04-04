@@ -15,6 +15,8 @@ public class OpeningFunds
 
     // Property to store the date when the opening funds are recorded.
     public string Date { get; set; }
+    List<OpeningFunds> openingFunds = new ();
+
 
     /// <summary>
     /// Saves the opening funds data to a JSON file at the specified file path.
@@ -24,6 +26,7 @@ public class OpeningFunds
     /// <param name="fundData">The OpeningFunds object that contains the data to be saved.</param>
     public void SaveOpeningFunds(OpeningFunds fundData)
     { 
+        openingFunds.Add(fundData);
         // Create a StreamWriter to write to the file specified by filePath.
         // Using 'using' ensures that the file will be properly closed after writing.
         using StreamWriter fileToWrite = new StreamWriter(filePath);
@@ -33,17 +36,11 @@ public class OpeningFunds
 
         // Serialize the OpeningFunds object (fundData) and write it to the file.
         // This converts the OpeningFunds object into a JSON formatted string and saves it in the file.
-        serializer.Serialize(fileToWrite, fundData);
+        serializer.Serialize(fileToWrite, openingFunds);
     }
 
     public List<OpeningFunds> LoadAllOpenFunds()
     {
-        // Initialize an empty list to hold the open fund data
-        List<OpeningFunds> openingFunds = new List<OpeningFunds>();
-
-        // OpeningFunds openingFund = JsonConvert.DeserializeObject<OpeningFunds>(filePath);
-
-
         // Check if the file exists at the specified file path
         if (File.Exists(filePath))
         {

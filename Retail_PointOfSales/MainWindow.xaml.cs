@@ -79,7 +79,28 @@ namespace Retail_PointOfSales
         /// </summary>
         private void CloseSearchPanel(object sender, RoutedEventArgs e)
         {
+            // Set the panel's visibility to collapsed when clicking close button
             SearchPanel.Visibility = Visibility.Collapsed;
+        }
+        
+        /// <summary>
+        /// Searches for products based on the search input and displays matching products.
+        /// </summary>
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            string searchText = SearchTextBoxProductsPanel.Text.ToLower(); // Get the search text from user input
+            var result = productManager.Search(searchText); // Search for matching products
+            if (result != null)
+            {
+                // If products are found, display them in the search panel
+                SearchPanel_ProductList.ItemsSource = result;
+            }
+            else
+            {
+                // If no products are found, show an error message
+                MessageBox.Show("Product not found. Please try again.", "Product not found", 
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         /// <summary>
@@ -122,14 +143,19 @@ namespace Retail_PointOfSales
         /// </summary>
         private void ConfirmQuantity(object sender, RoutedEventArgs e)
         {
+            // Attempt to parse the text entered in the QuantityTextBox as an integer
             if (int.TryParse(QuantityTextBox.Text, out int quantity) && quantity > 0)
             {
-                AddProductToCart(selectedProduct, quantity); // Add product to the cart
-                QuantityPanel.Visibility = Visibility.Collapsed; // Close the quantity panel
+                // If parsing succeeds and the quantity is greater than 0, add the product to the cart
+                AddProductToCart(selectedProduct, quantity); // Add the selected product to the cart with the specified quantity
+        
+                // Hide the quantity selection panel after confirming the quantity
+                QuantityPanel.Visibility = Visibility.Collapsed; // Close the panel where the user selected the quantity
             }
             else
             {
-                MessageBox.Show("Please enter a valid quantity."); // Show an error message
+                // If the entered quantity is invalid (not a number or less than 1), show an error message
+                MessageBox.Show("Please enter a valid quantity."); // Display an error message to the user
             }
         }
 
@@ -149,27 +175,7 @@ namespace Retail_PointOfSales
             ProductListView.Items.Add(productToAdd); // Add product to the list view
             UpdateSaleTotal(); // Update the sale total
         }
-
-        /// <summary>
-        /// Searches for products based on the search input and displays matching products.
-        /// </summary>
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
-        {
-            string searchText = SearchTextBoxProductsPanel.Text.ToLower(); // Get the search text from user input
-            var result = productManager.Search(searchText); // Search for matching products
-            if (result != null)
-            {
-                // If products are found, display them in the search panel
-                SearchPanel_ProductList.ItemsSource = result;
-            }
-            else
-            {
-                // If no products are found, show an error message
-                MessageBox.Show("Product not found. Please try again.", "Product not found", 
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
+        
         /// <summary>
         /// Opens the End of Day window.
         /// </summary>
@@ -189,14 +195,12 @@ namespace Retail_PointOfSales
             {
                 // Show a message if the cart is empty
                 MessageBox.Show("No products to delete!");
-                return; // Exit the method if the cart is empty
             }
             // Check if no product is selected (no item in ProductListView is highlighted)
             else if (ProductListView.SelectedIndex.Equals(-1))
             {
                 // Show a message if no product is selected for deletion
                 MessageBox.Show("Please select a product to delete.");
-                return; // Exit the method if no product is selected
             }
             else
             {
@@ -288,16 +292,6 @@ namespace Retail_PointOfSales
         }
 
         /// <summary>
-        /// Opens the Sales Report window.
-        /// </summary>
-        private void SalesReportButton_Click(object sender, RoutedEventArgs e)
-        {
-            SalesReport SalesReportWindow = new SalesReport();
-            // Show the SalesReport window
-            SalesReportWindow.ShowDialog();
-        }
-
-        /// <summary>
         /// Opens the Credit Payment window for completing the sale.
         /// </summary>
         private void CreditPaymentButton_Click(object sender, RoutedEventArgs e)
@@ -355,7 +349,16 @@ namespace Retail_PointOfSales
                 TotalTextBlock.Text = "";
             }
         }
-
+        
+        /// <summary>
+        /// Opens the Sales Report window.
+        /// </summary>
+        private void SalesReportButton_Click(object sender, RoutedEventArgs e)
+        {
+            SalesReport SalesReportWindow = new SalesReport();
+            // Show the SalesReport window
+            SalesReportWindow.ShowDialog();
+        }
 
         /// <summary>
         /// Exits the application in WPF
