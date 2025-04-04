@@ -8,7 +8,7 @@ namespace Retail_PointOfSales
     /// <summary>
     /// Interaction logic for CreditPayment.xaml
     /// </summary>
-    public partial class CreditPayment : Window
+    public partial class CreditPayment
     {
         // The sale being closed, passed as an argument to the constructor
         Sale closingSale;

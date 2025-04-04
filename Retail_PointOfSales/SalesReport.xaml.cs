@@ -47,6 +47,15 @@ namespace Retail_PointOfSales
             // Filter sales based on the provided start and end dates
             List<Sale> filteredSales = saleManager.FilterSales(startDate, endDate);
 
+            if (filteredSales.Count == 0)
+            {
+                MessageBox.Show(
+                    "No sales found for the informed period.", 
+                    "No Sales Found", 
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             // Create a list to store flattened sale data in the form of SaleReportItem objects
             List<SaleReportItem> reportItems = new List<SaleReportItem>();
 

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Retail_PointOfSales.Model;
 
 namespace Retail_PointOfSales
 {
@@ -11,12 +12,11 @@ namespace Retail_PointOfSales
     /// </summary>
     public partial class MainWindow
     {
-        private List<Product> _products;
         // Initializing the actual date and time and setting it to the actualDate variable
         DateTime actualDate = DateTime.Now;
      
         private Product selectedProduct;
-        ProductManager productManager = new ();
+        private readonly ProductManager productManager = new ();
         
         /// <summary>
         /// Initializes the MainWindow.
@@ -388,7 +388,9 @@ namespace Retail_PointOfSales
             else
             {
                 //Validate if the user really wants to void the order
-                MessageBoxResult result = MessageBox.Show("Are you sure you want to void the order?", "Void order", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                MessageBoxResult result = MessageBox.Show(
+                    "Are you sure you want to void the order?", "Void order", 
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result != MessageBoxResult.No)
                 {
                     ProductListView.Items.Clear(); // Clear the product list

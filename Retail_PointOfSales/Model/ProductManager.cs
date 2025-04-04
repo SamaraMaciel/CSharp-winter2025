@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace Retail_PointOfSales;
+namespace Retail_PointOfSales.Model;
 
 /// <summary>
 /// Manages product operations such as loading and searching products from a JSON file.

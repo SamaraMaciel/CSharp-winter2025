@@ -7,7 +7,7 @@ public class Sale
     public string SaleId { get; set; }
 
     // List of products involved in the sale
-    public List<Product> Products { get; set; } = new List<Product>();
+    public List<Product> Products { get; set; } = new ();
 
     // The payment method used for the sale (Cash or Credit Card)
     public string PaymentMethod { get; set; }

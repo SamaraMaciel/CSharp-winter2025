@@ -10,7 +10,7 @@ public class SaleManager
     string filePath = Path.Combine(AppContext.BaseDirectory, @"..\..\..\JSON\sales.json");
 
     // List to hold the sales data
-    List<Sale> sales = new List<Sale>();
+    List<Sale> sales = new();
 
     /// <summary>
     /// Initializes a new instance of the SaleManager class. 
@@ -18,28 +18,7 @@ public class SaleManager
     /// </summary>
     public SaleManager()
     {
-        LoadSales(); // Loads sales from the file
         LoadAllSales(); // Loads the LoadAllSales() method when a new instance of the SaleManager class is created
-    }
-
-    /// <summary>
-    /// Loads sales data from a JSON file into the sales list.
-    /// </summary>
-    public void LoadSales()
-    {
-        // Check if the sales file exists
-        if (File.Exists(filePath))
-        {
-            // Open the file to read its contents
-            using StreamReader fileToRead = new StreamReader(filePath);
-            string json = fileToRead.ReadToEnd();
-            
-            // If the file is not empty, deserialize the JSON data into the sales list
-            if (!string.IsNullOrEmpty(json))
-            {
-                sales = JsonConvert.DeserializeObject<List<Sale>>(json) ?? new List<Sale>();
-            }
-        }
     }
 
     /// <summary>
@@ -66,11 +45,14 @@ public class SaleManager
     /// <returns>A list of sales that fall within the specified date range.</returns>
     public List<Sale> FilterSales(string startDate, string endDate)
     {
-        // Find sales within the date range using the StartsWith method
-        List<Sale> filteredSales = sales.FindAll(sale => sale.SaleDate.StartsWith(startDate) || sale.SaleDate.StartsWith(endDate));
-        
-        // Output the number of filtered sales to the console
-        Console.WriteLine(filteredSales.Count);
+        // Find sales within the date range using string comparison
+        List<Sale> filteredSales = sales.FindAll(sale =>
+        {
+            string saleDate = sale.SaleDate.Substring(0, 10); // Get only the date part (yyyy-MM-dd)
+
+            // Check if the sale date is within the range
+            return string.CompareOrdinal(saleDate, startDate) >= 0 && string.CompareOrdinal(saleDate, endDate) <= 0;
+        });
 
         // Return the list of filtered sales
         return filteredSales;
@@ -82,9 +64,6 @@ public class SaleManager
     /// <returns>A list of all sales loaded from the file.</returns>
     public List<Sale> LoadAllSales()
     {
-        // Initialize an empty list to hold the sales data
-        List<Sale> salesList = new List<Sale>();
-
         // Check if the file exists at the specified file path
         if (File.Exists(filePath))
         {
@@ -95,11 +74,11 @@ public class SaleManager
             // If the file is not empty, deserialize the JSON content into a list of Sale objects
             if (!string.IsNullOrEmpty(json))
             {
-                salesList = JsonConvert.DeserializeObject<List<Sale>>(json) ?? new List<Sale>();
+                sales = JsonConvert.DeserializeObject<List<Sale>>(json) ?? new List<Sale>();
             }
         }
 
         // Return the list of sales
-        return salesList;
+        return sales;
     }
 }

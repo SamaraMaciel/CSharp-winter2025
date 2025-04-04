@@ -8,7 +8,7 @@ namespace Retail_PointOfSales
     /// <summary>
     /// Interaction logic for CashPayment.xaml
     /// </summary>
-    public partial class CashPayment : Window
+    public partial class CashPayment
     {
         // The sale being closed, passed as an argument to the constructor
         Sale closingSale;
