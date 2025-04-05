@@ -47,6 +47,8 @@ namespace Retail_PointOfSales
             // Filter sales based on the provided start and end dates
             List<Sale> filteredSales = saleManager.FilterSales(startDate, endDate);
 
+            // If no sales are returned from the filter, show a message
+            // return statement finishes the execution of the rest of the method.
             if (filteredSales.Count == 0)
             {
                 MessageBox.Show(
