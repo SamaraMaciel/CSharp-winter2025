@@ -5,9 +5,9 @@ namespace Retail_PointOfSales
     /// <summary>
     /// Interaction logic for LoginWIndow.xaml
     /// </summary>
-    public partial class LoginWIndow
+    public partial class LoginWindow
     {
-        public LoginWIndow()
+        public LoginWindow()
         {
             InitializeComponent();
         }
