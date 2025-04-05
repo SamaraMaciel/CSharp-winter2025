@@ -10,11 +10,9 @@ namespace Retail_PointOfSales
     /// </summary>
     public partial class EndofDay : Window
     {
-        private List<Sale> sales; // work in progress - SM
         SaleManager salesManager = new(); // instanciate a new class of SaleManager
         OpeningFunds openingFunds = new OpeningFunds(); // instanciate a new class of OpeningFunds
-        EndOfDay newEndOfDay = new();
-
+        EndOfDay newEndOfDay = new(); // instanciate a new class of EndOfDay
 
         public EndofDay()
         {
@@ -133,29 +131,35 @@ namespace Retail_PointOfSales
             Variance.Text = variance.ToString("C");
         }
 
+        // Auxiliar method to get the total cash from the TotalTextBlock field
         private decimal EndOfDayAuxiliaryTotalCash()
         {
             var totalcash = TotalTextBlock.Text;
             return ToDecimal(totalcash);
         }
 
+        // Auxiliar method to get the total cash sales from the TotalCashSales field
         private decimal EndOfDayAuxiliaryTotalCashSales()
         {
             var totalCashSales = TotalCashSales.Text;
             return ToDecimal(totalCashSales);
         }
 
+        // Auxiliar method to get the total credit card sales from the TotalCreditSales field
         private decimal EndOfDayAuxiliaryTotalCreditSales()
         {
             var totalCreditSales = TotalCreditSales.Text;
             return ToDecimal(totalCreditSales);
         }
 
+        // Auxiliar method to get the opening fund from the OpeningFund field
         private decimal EndOfDayAuxiliaryOpeningFund()
         {
             var openingFund = OpeningFund.Text;
             return ToDecimal(openingFund);
         }
+
+        // Auxiliar method to get the opening fund from the OpeningFund field
         private decimal EndOfDayAuxiliaryExpectedCash()
         {
             var expectedCash = ExpectedCash.Text;
