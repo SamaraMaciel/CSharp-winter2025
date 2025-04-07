@@ -164,17 +164,38 @@ namespace Retail_PointOfSales
         /// </summary>
         private void AddProductToCart(Product product, int quantity)
         {
-            Product productToAdd = new Product
+            // Check if the product already exists in the cart
+            var existingProduct = ProductListView.Items.Cast<Product>()
+                .FirstOrDefault(p => p.ProductId == product.ProductId);
+    
+            if (existingProduct != null)
             {
-                ProductId = product.ProductId,
-                ProductName = product.ProductName,
-                ProductPrice = product.ProductPrice,
-                Quantity = quantity,
-            };
+                // If the product is found, update the quantity and price
+                existingProduct.Quantity += quantity;
+                
+                // Remove the old product and add the updated one
+                ProductListView.Items.Remove(existingProduct);
+                ProductListView.Items.Add(existingProduct);
+            }
+            else
+            {
+                // If the product is not found, create a new product and add it to the list
+                Product productToAdd = new Product
+                {
+                    ProductId = product.ProductId,
+                    ProductName = product.ProductName,
+                    ProductPrice = product.ProductPrice * quantity,
+                    Quantity = quantity,
+                };
+
+                ProductListView.Items.Add(productToAdd); // Add the new product to the list view
+            }
+
             QuantityTextBox.Text = ""; // Clear the quantity textbox
-            ProductListView.Items.Add(productToAdd); // Add product to the list view
             UpdateSaleTotal(); // Update the sale total
         }
+
+
         
         /// <summary>
         /// Opens the End of Day window.
